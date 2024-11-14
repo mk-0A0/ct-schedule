@@ -1,13 +1,23 @@
 import Image from 'next/image'
 import styles from './page.module.css'
-import { auth, signIn } from '@/auth'
+import { auth, signIn, signOut } from '@/auth'
 
 export default async function Home() {
   const session = await auth()
   return (
     <div className={styles.page}>
       {session ? (
-        <p>welcome</p>
+        <>
+          <p>welcome</p>
+          <button
+            onClick={async () => {
+              'use server'
+              await signOut()
+            }}
+          >
+            SignOut
+          </button>
+        </>
       ) : (
         <>
           <p>please signin</p>
