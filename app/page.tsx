@@ -14,7 +14,7 @@ export default async function Home() {
           <button
             onClick={async () => {
               'use server'
-              await signIn('google')
+              await signIn('google', { redirectTo: '/mypage' })
             }}
           >
             Signin with Google
