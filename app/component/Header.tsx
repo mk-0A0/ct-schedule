@@ -1,4 +1,5 @@
 import { auth, signIn, signOut } from '@/auth'
+import { Button } from '@/components/ui/button'
 
 export const Header = async () => {
   const session = await auth()
@@ -12,27 +13,23 @@ export const Header = async () => {
       }}
     >
       {session ? (
-        <>
-          <button
-            onClick={async () => {
-              'use server'
-              await signOut()
-            }}
-          >
-            SignOut
-          </button>
-        </>
+        <Button
+          onClick={async () => {
+            'use server'
+            await signOut()
+          }}
+        >
+          SignOut
+        </Button>
       ) : (
-        <>
-          <button
-            onClick={async () => {
-              'use server'
-              await signIn('google', { redirectTo: '/mypage' })
-            }}
-          >
-            Signin with Google
-          </button>
-        </>
+        <Button
+          onClick={async () => {
+            'use server'
+            await signIn('google', { redirectTo: '/mypage' })
+          }}
+        >
+          Signin with Google
+        </Button>
       )}
     </header>
   )
