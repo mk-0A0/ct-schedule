@@ -1,18 +1,26 @@
 import Image from 'next/image'
 import styles from './page.module.css'
-import { signIn } from '@/auth'
+import { auth, signIn } from '@/auth'
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth()
   return (
     <div className={styles.page}>
-      <form
-        action={async () => {
-          'use server'
-          await signIn('google')
-        }}
-      >
-        <button type="submit">Signin with Google</button>
-      </form>
+      {session ? (
+        <p>welcome</p>
+      ) : (
+        <>
+          <p>please signin</p>
+          <button
+            onClick={async () => {
+              'use server'
+              await signIn('google')
+            }}
+          >
+            Signin with Google
+          </button>
+        </>
+      )}
       <main className={styles.main}>
         <Image
           className={styles.logo}
