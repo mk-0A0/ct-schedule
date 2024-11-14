@@ -1,9 +1,18 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import { signIn } from '@/auth'
 
 export default function Home() {
   return (
     <div className={styles.page}>
+      <form
+        action={async () => {
+          'use server'
+          await signIn('google')
+        }}
+      >
+        <button type="submit">Signin with Google</button>
+      </form>
       <main className={styles.main}>
         <Image
           className={styles.logo}
