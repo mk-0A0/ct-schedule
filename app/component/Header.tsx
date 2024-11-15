@@ -4,14 +4,7 @@ import { Button } from '@/components/ui/button'
 export const Header = async () => {
   const session = await auth()
   return (
-    <header
-      style={{
-        padding: '16px',
-        display: 'flex',
-        justifyContent: 'end',
-        gap: '16px',
-      }}
-    >
+    <header className="flex justify-end gap-4 p-4 shadow">
       {session ? (
         <Button
           onClick={async () => {
