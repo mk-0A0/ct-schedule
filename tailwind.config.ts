@@ -8,6 +8,9 @@ module.exports = {
     './src/**/*.{ts,tsx}',
   ],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
       borderRadius: {
         lg: 'var(--radius)',
