@@ -8,6 +8,7 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from '@/components/ui/menubar'
+import Link from 'next/link'
 
 export const Header = async () => {
   const session = await auth()
@@ -32,6 +33,9 @@ export const Header = async () => {
                 </Avatar>
               </MenubarTrigger>
               <MenubarContent>
+                <MenubarItem>
+                  <Link href={{ pathname: '/mypage' }}>マイページ</Link>
+                </MenubarItem>
                 <MenubarItem
                   onClick={async () => {
                     'use server'
