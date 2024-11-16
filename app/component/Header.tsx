@@ -32,7 +32,7 @@ export const Header = async () => {
                   />
                 </Avatar>
               </MenubarTrigger>
-              <MenubarContent>
+              <MenubarContent align="end">
                 <MenubarItem>
                   <Link href={{ pathname: '/mypage' }}>マイページ</Link>
                 </MenubarItem>
