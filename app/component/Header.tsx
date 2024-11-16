@@ -42,7 +42,7 @@ export const Header = async () => {
                     await signOut()
                   }}
                 >
-                  ログアウト
+                  <span className="text-red-600 font-bold">ログアウト</span>
                 </MenubarItem>
               </MenubarContent>
             </MenubarMenu>
