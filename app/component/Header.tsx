@@ -13,7 +13,13 @@ export const Header = async () => {
   const session = await auth()
   return (
     <header className="p-4 shadow">
-      <div className="container flex justify-end gap-4">
+      <div className="container flex justify-between items-center gap-4">
+        <img
+          src="https://placehold.jp/150x50.png"
+          alt="ロゴ"
+          width="150"
+          height="50"
+        />
         {session ? (
           <Menubar className="rounded-full p-0 border-none">
             <MenubarMenu>
