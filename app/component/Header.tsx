@@ -16,7 +16,7 @@ export const Header = async () => {
       {session ? (
         <Menubar className="rounded-full p-0 border-none">
           <MenubarMenu>
-            <MenubarTrigger className="rounded-full p-0">
+            <MenubarTrigger className="rounded-full p-0 cursor-pointer">
               <Avatar>
                 <AvatarImage
                   src={`${session.user && session.user.image}`}
