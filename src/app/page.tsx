@@ -3,6 +3,9 @@ import Image from "next/image";
 export default function Home() {
 
   const getCombinations = (array, size) => {
+    if(array.length % 2 !== 0){
+      array.push(null)
+    }
     const result = []
     const helper = (tempArray, start) => {
       if(tempArray.length === size){
@@ -18,7 +21,7 @@ export default function Home() {
     helper([], 0)
     return result
   }
-  console.log(getCombinations([1,2,3,4], 2))
+  console.log(getCombinations([1,2,3], 2))
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
