@@ -1,6 +1,25 @@
 import Image from "next/image";
 
 export default function Home() {
+
+  const getCombinations = (array, size) => {
+    const result = []
+    const helper = (tempArray, start) => {
+      if(tempArray.length === size){
+        result.push([...tempArray])
+        return
+      }
+      for (let i = start; i < array.length; i++) {
+        tempArray.push(array[i])
+        helper(tempArray, i + 1)
+        tempArray.pop()
+      }
+    }
+    helper([], 0)
+    return result
+  }
+  console.log(getCombinations([1,2,3,4], 2))
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
