@@ -2,26 +2,32 @@ import Image from "next/image";
 
 export default function Home() {
   const getCombinations = <T,>(array: T[], size: number): T[][] => {
+    // arrayが奇数の場合はnullを追加
     if (array.length % 2 !== 0) {
       array.push(null as unknown as T);
     }
 
     const result: T[][] = [];
 
+    // 再帰関数
     const helper = (tempArray: T[], start: number): void => {
+      // tempArrayの要素数がsizeになったら現在の組み合わせをresultに追加 e.g.)[1,2]
       if (tempArray.length === size) {
         result.push([...tempArray]);
         return;
       }
 
       for (let i = start; i < array.length; i++) {
-        tempArray.push(array[i]);
-        helper(tempArray, i + 1);
-        tempArray.pop();
+        tempArray.push(array[i]); // tempArrayにarrayのi番目の要素を追加 e.g.)[1]
+        helper(tempArray, i + 1); // ↑で作成したtempArrayを再帰関数に渡す。startはarrayのi+1番目から
+        tempArray.pop(); // バックトラック（計算のリセット）
       }
     };
 
+    // 再帰関数の初期化（デフォルト値）
+    // 空配列の0番目から処理を開始
     helper([], 0);
+
     return result;
   };
 
