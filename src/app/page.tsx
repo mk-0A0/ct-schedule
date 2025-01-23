@@ -30,11 +30,29 @@ export default function Home() {
 
     return result;
   };
-
-  console.log(getCombinations([1, 2, 3, 4], 2));
+  const array = [1, 2, 3, 4];
+  console.log(getCombinations(array, 2));
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <table>
+        <tr className="border-b">
+          <th className="border-r"></th>
+          {array.map((item, index) => (
+            <th key={`row-th-${index}`} className="w-10 h-10 border-r">
+              {item}
+            </th>
+          ))}
+        </tr>
+        {array.map((item, index) => (
+          <tr key={`col-tr-${index}`} className="border-b">
+            <th className="w-10 h-10 border-r">{item}</th>
+            {array.map((_, index) => (
+              <td key={`td-${index}`} className="w-10 h-10 border-r"></td>
+            ))}
+          </tr>
+        ))}
+      </table>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
