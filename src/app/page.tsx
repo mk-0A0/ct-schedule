@@ -19,7 +19,7 @@ export default function Home() {
 
       for (let i = start; i < array.length; i++) {
         tempArray.push(array[i]); // tempArrayにarrayのi番目の要素を追加 e.g.)[1]
-        helper(tempArray, i + 1); // ↑で作成したtempArrayを再帰関数に渡す。startはarrayのi+1番目から
+        helper(tempArray, i + 1); // ↑で作成したtempArrayを再帰関数に渡す。startはarrayのi+1番目から（重複を許可しない）
         tempArray.pop(); // バックトラック（計算のリセット）
       }
     };
