@@ -22,7 +22,7 @@ export default function Home() {
       for (let i = 1; i < remaining.length; i++) {
         // 1ペアを作成
         const pair = [first, remaining[i]];
-        console.log([...pairs, pair]);
+
         helper(
           // pairに追加したメンバーを除いた残りの参加者の配列
           remaining.filter((_, index) => index !== 0 && index !== i),
@@ -38,29 +38,8 @@ export default function Home() {
   const participants = ["a", "b", "c"];
   console.log("generatePairings", generatePairings(participants));
 
-  const array = [1, 2, 3, 4];
-
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <table>
-        <tr className="border-b">
-          <th className="border-r"></th>
-          {array.map((item, index) => (
-            <th key={`row-th-${index}`} className="w-10 h-10 border-r">
-              {item}
-            </th>
-          ))}
-        </tr>
-        {array.map((item, index) => (
-          <tr key={`col-tr-${index}`} className="border-b">
-            <th className="w-10 h-10 border-r">{item}</th>
-            {array.map((_, index) => (
-              <td key={`td-${index}`} className="w-10 h-10 border-r"></td>
-            ))}
-          </tr>
-        ))}
-      </table>
-      {generatePairings(["a", "b", "c", "d"])}
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
