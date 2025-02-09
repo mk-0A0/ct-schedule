@@ -1,37 +1,44 @@
 import Image from "next/image";
 
 export default function Home() {
-  const getCombinations = <T,>(array: T[], size: number): T[][] => {
-    // arrayが奇数の場合はnullを追加
-    if (array.length % 2 !== 0) {
-      array.push(null as unknown as T);
+  const generatePairings = <T,>(participants: T[]): T[][][] => {
+    const result: T[][][] = [];
+
+    // 奇数だった場合"お休み"を追加
+    if (participants.length % 2 !== 0) {
+      participants.push("お休み" as unknown as T);
     }
 
-    const result: T[][] = [];
-
-    // 再帰関数
-    const helper = (tempArray: T[], start: number): void => {
-      // tempArrayの要素数がsizeになったら現在の組み合わせをresultに追加 e.g.)[1,2]
-      if (tempArray.length === size) {
-        result.push([...tempArray]);
+    const helper = (remaining: T[], pairs: T[][]): void => {
+      // 2人1ペアができたらresultにpairsを追加する
+      if (remaining.length === 0) {
+        result.push([...pairs]);
         return;
       }
 
-      for (let i = start; i < array.length; i++) {
-        tempArray.push(array[i]); // tempArrayにarrayのi番目の要素を追加 e.g.)[1]
-        helper(tempArray, i + 1); // ↑で作成したtempArrayを再帰関数に渡す。startはarrayのi+1番目から（重複を許可しない）
-        tempArray.pop(); // バックトラック（計算のリセット）
+      // 残りの参加者の中で一番最初のメンバーを指定
+      const first = remaining[0];
+
+      for (let i = 1; i < remaining.length; i++) {
+        // 1ペアを作成
+        const pair = [first, remaining[i]];
+        console.log([...pairs, pair]);
+        helper(
+          // pairに追加したメンバーを除いた残りの参加者の配列
+          remaining.filter((_, index) => index !== 0 && index !== i),
+          [...pairs, pair]
+        );
       }
     };
 
-    // 再帰関数の初期化（デフォルト値）
-    // 空配列の0番目から処理を開始
-    helper([], 0);
-
+    helper(participants, []);
     return result;
   };
+
+  const participants = ["a", "b", "c"];
+  console.log("generatePairings", generatePairings(participants));
+
   const array = [1, 2, 3, 4];
-  console.log(getCombinations(array, 2));
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -53,6 +60,7 @@ export default function Home() {
           </tr>
         ))}
       </table>
+      {generatePairings(["a", "b", "c", "d"])}
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
