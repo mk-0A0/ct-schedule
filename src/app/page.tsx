@@ -38,5 +38,15 @@ export default function Home() {
   const participants = ["a", "b", "c"];
   console.log("generatePairings", generatePairings(participants));
 
-  return <main></main>;
+  return (
+    <main>
+      {generatePairings(participants).map((pairs) => (
+        <ul className="border-b-2 border-white" key={String(pairs)}>
+          {pairs.map((pair) => (
+            <li key={String(pair)}>{pair}</li>
+          ))}
+        </ul>
+      ))}
+    </main>
+  );
 }
