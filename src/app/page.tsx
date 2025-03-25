@@ -1,19 +1,12 @@
 export default function Home() {
   const members = ["😺", "🐶", "🐱", "🐭", "🐹"];
+  const membersWithEmpty = ["", ...members];
 
   return (
     <main>
       <table>
         <tbody>
-          <tr className="border-b">
-            <th className="border-r"></th>
-            {members.map((member, index) => (
-              <th key={`row-th-${index}`} className="w-10 h-10 border-r">
-                {member}
-              </th>
-            ))}
-          </tr>
-          {members.map((member, index) => (
+          {membersWithEmpty.map((member, index) => (
             <tr key={`col-tr-${index}`} className="border-b">
               <th className="w-10 h-10 border-r">{member}</th>
               {members.map((_, index) => (
