@@ -15,7 +15,12 @@ export default function Home() {
                     {rowMember}
                   </th>
                 ) : (
-                  <td key={`td-${tdIndex}`} className="w-10 h-10 border-r"></td>
+                  <td
+                    key={`td-${tdIndex}`}
+                    className={`w-10 h-10 border-r text-center ${
+                      trIndex - 1 === tdIndex && "bg-gray-100"
+                    }`}
+                  ></td>
                 )
               )}
             </tr>
