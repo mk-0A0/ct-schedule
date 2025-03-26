@@ -6,9 +6,9 @@ export default function Home() {
     <main>
       <table>
         <tbody>
-          {membersWithEmpty.map((member, index) => (
-            <tr key={`col-tr-${index}`} className="border-b">
-              <th className="w-10 h-10 border-r">{member}</th>
+          {membersWithEmpty.map((colMember, trIndex) => (
+            <tr key={`col-tr-${trIndex}`} className="border-b">
+              <th className="w-10 h-10 border-r">{colMember}</th>
               {members.map((_, index) => (
                 <td key={`td-${index}`} className="w-10 h-10 border-r"></td>
               ))}
