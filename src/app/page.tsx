@@ -20,7 +20,9 @@ export default function Home() {
                     className={`w-10 h-10 border-r text-center ${
                       trIndex - 1 === tdIndex && "bg-gray-100"
                     }`}
-                  ></td>
+                  >
+                    {tdIndex + (trIndex - 1)}
+                  </td>
                 )
               )}
             </tr>
