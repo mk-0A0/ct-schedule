@@ -21,7 +21,7 @@ export default function Home() {
                       trIndex - 1 === tdIndex && "bg-gray-100"
                     }`}
                   >
-                    {tdIndex + (trIndex - 1)}
+                    {(tdIndex + (trIndex - 1)) % members.length}
                   </td>
                 )
               )}
