@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Home() {
   const generatePairings = <T,>(participants: T[]): T[][][] => {
     const result: T[][][] = [];
