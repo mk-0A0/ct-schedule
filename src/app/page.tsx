@@ -3,8 +3,8 @@ export default function Home() {
   const membersWithEmpty = ["", ...members];
 
   return (
-    <main>
-      <table>
+    <main className="grid justify-center mt-10">
+      <table className="border-t border-l">
         <tbody>
           {membersWithEmpty.map((colMember, trIndex) => (
             <tr key={`col-tr-${trIndex}`} className="border-b">
