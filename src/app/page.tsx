@@ -21,6 +21,7 @@ export default function Home() {
                       trIndex - 1 === tdIndex && "bg-gray-100"
                     }`}
                   >
+                    {/* trIndexはmembersWithEmptyから取得しており、要素数が1つ多いため-1をしている */}
                     {(tdIndex + (trIndex - 1)) % members.length}
                   </td>
                 )
