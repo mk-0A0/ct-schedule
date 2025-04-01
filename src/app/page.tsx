@@ -1,5 +1,8 @@
 export default function Home() {
   const members = ["😺", "🐶", "🐱", "🐭", "🐹"];
+  if (members.length % 2 !== 0) {
+    members.push("㊡");
+  }
   const membersWithEmpty = ["", ...members];
 
   return (
