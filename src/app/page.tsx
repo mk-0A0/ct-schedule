@@ -1,9 +1,22 @@
+import { addDays, eachDayOfInterval, format, isMonday } from "date-fns";
+import { ja } from "date-fns/locale";
+
 export default function Home() {
   const members = ["😺", "🐶", "🐱", "🐭", "🐹"];
   if (members.length % 2 !== 0) {
     members.push("㊡");
   }
   const membersWithEmpty = ["", ...members];
+
+  const today = new Date();
+  const later = addDays(today, 90);
+  const mondays = eachDayOfInterval({
+    start: today,
+    end: later,
+  })
+    .filter((day) => isMonday(day))
+    .map((date) => format(date, "yyyy年M/d(E)", { locale: ja }));
+  console.log(mondays);
 
   return (
     <main className="grid justify-center mt-10">
