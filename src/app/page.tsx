@@ -13,7 +13,6 @@ export default function Home() {
   })
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy年M/d(E)", { locale: ja }));
-  console.log(mondays);
 
   return (
     <main className="flex gap-10 justify-center mt-10">
