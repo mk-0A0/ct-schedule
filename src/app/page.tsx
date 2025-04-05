@@ -43,12 +43,15 @@ export default function Home() {
         </tbody>
       </table>
       <ul>
-        {mondays.map((monday, index) => (
+        {mondays.map(
+          (monday, index) =>
+            index < members.length && (
           <li key={monday}>
             <span>{index % members.length}:</span>
             <time dateTime={monday}>{monday}</time>
           </li>
-        ))}
+            )
+        )}
       </ul>
     </main>
   );
