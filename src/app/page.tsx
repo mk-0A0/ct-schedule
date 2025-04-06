@@ -1,4 +1,11 @@
-import { addDays, eachDayOfInterval, format, isMonday } from "date-fns";
+import {
+  addMonths,
+  eachDayOfInterval,
+  format,
+  getMonth,
+  getYear,
+  isMonday,
+} from "date-fns";
 import { ja } from "date-fns/locale";
 
 export default function Home() {
@@ -6,10 +13,11 @@ export default function Home() {
   const membersWithEmpty = ["", ...members];
 
   const today = new Date();
-  const later = addDays(today, 90);
+  const thisMonth = getMonth(today) + 1;
+  const thisYear = getYear(today);
   const mondays = eachDayOfInterval({
-    start: today,
-    end: later,
+    start: new Date(`${thisYear}-${thisMonth}-01`),
+    end: addMonths(new Date(`${thisYear}-${thisMonth}-31`), 2),
   })
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy年M/d(E)", { locale: ja }));
@@ -46,10 +54,10 @@ export default function Home() {
         {mondays.map(
           (monday, index) =>
             index < members.length && (
-          <li key={monday}>
-            <span>{index % members.length}:</span>
-            <time dateTime={monday}>{monday}</time>
-          </li>
+              <li key={monday}>
+                <span>{index % members.length}:</span>
+                <time dateTime={monday}>{monday}</time>
+              </li>
             )
         )}
       </ul>
