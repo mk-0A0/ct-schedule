@@ -9,7 +9,7 @@ import {
 import { ja } from "date-fns/locale";
 
 export default function Home() {
-  const members = ["😺", "🐶", "🐱", "🐭", "🐹"];
+  const members = ["🐱", "🐶", "🐷", "🐭", "🐹"];
   const membersWithEmpty = ["", ...members];
 
   const today = new Date();
