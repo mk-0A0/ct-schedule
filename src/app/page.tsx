@@ -20,7 +20,7 @@ export default function Home() {
     end: addMonths(new Date(`${thisYear}-${thisMonth}-31`), 2),
   })
     .filter((day) => isMonday(day))
-    .map((date) => format(date, "yyyy年M/d(E)", { locale: ja }));
+    .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
 
   return (
     <main className="flex gap-10 justify-center mt-10">
@@ -31,7 +31,10 @@ export default function Home() {
               <th className="w-10 h-10 border-r">{colMember}</th>
               {members.map((rowMember, colIndex) =>
                 rowIndex === 0 ? (
-                  <th key={`cell-th-${colIndex}`} className="w-10 h-10 border-r">
+                  <th
+                    key={`cell-th-${colIndex}`}
+                    className="w-10 h-10 border-r"
+                  >
                     {rowMember}
                   </th>
                 ) : (
