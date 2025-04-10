@@ -1,50 +1,69 @@
+import {
+  addMonths,
+  eachDayOfInterval,
+  format,
+  getMonth,
+  getYear,
+  isMonday,
+} from "date-fns";
+import { ja } from "date-fns/locale";
+
 export default function Home() {
-  const generatePairings = <T,>(participants: T[]): T[][][] => {
-    const result: T[][][] = [];
+  const members = ["🐱", "🐶", "🐷", "🐭", "🐹"];
+  const membersWithEmpty = ["", ...members];
 
-    // 奇数だった場合"お休み"を追加
-    if (participants.length % 2 !== 0) {
-      participants.push("お休み" as unknown as T);
-    }
-
-    const helper = (remaining: T[], pairs: T[][]): void => {
-      // 2人1ペアができたらresultにpairsを追加する
-      if (remaining.length === 0) {
-        result.push([...pairs]);
-        return;
-      }
-
-      // 残りの参加者の中で一番最初のメンバーを指定
-      const first = remaining[0];
-
-      for (let i = 1; i < remaining.length; i++) {
-        // 1ペアを作成
-        const pair = [first, remaining[i]];
-
-        helper(
-          // pairに追加したメンバーを除いた残りの参加者の配列
-          remaining.filter((_, index) => index !== 0 && index !== i),
-          [...pairs, pair]
-        );
-      }
-    };
-
-    helper(participants, []);
-    return result;
-  };
-
-  const participants = ["a", "b", "c"];
-  console.log("generatePairings", generatePairings(participants));
+  const today = new Date();
+  const thisMonth = getMonth(today) + 1;
+  const thisYear = getYear(today);
+  const mondays = eachDayOfInterval({
+    start: new Date(`${thisYear}-${thisMonth}-01`),
+    end: addMonths(new Date(`${thisYear}-${thisMonth}-31`), 2),
+  })
+    .filter((day) => isMonday(day))
+    .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
 
   return (
-    <main>
-      {generatePairings(participants).map((pairs) => (
-        <ul className="border-b-2 border-white" key={String(pairs)}>
-          {pairs.map((pair) => (
-            <li key={String(pair)}>{pair}</li>
+    <main className="flex gap-10 justify-center mt-10">
+      <table className="border-t border-l h-full">
+        <tbody>
+          {membersWithEmpty.map((colMember, rowIndex) => (
+            <tr key={`tr-${rowIndex}`} className="border-b">
+              <th className="w-10 h-10 border-r">{colMember}</th>
+              {members.map((rowMember, colIndex) =>
+                rowIndex === 0 ? (
+                  <th
+                    key={`cell-th-${colIndex}`}
+                    className="w-10 h-10 border-r"
+                  >
+                    {rowMember}
+                  </th>
+                ) : (
+                  <td
+                    key={`cell-${colIndex}`}
+                    className={`w-10 h-10 border-r text-center ${
+                      rowIndex - 1 === colIndex && "bg-gray-100"
+                    }`}
+                  >
+                    {/* rowIndexはmembersWithEmptyから取得しており、要素数が1つ多いため-1をしている */}
+                    {(colIndex + rowIndex - 1) % members.length}
+                  </td>
+                )
+              )}
+            </tr>
           ))}
-        </ul>
-      ))}
+        </tbody>
+      </table>
+      <ul>
+        {mondays.map(
+          (monday, index) =>
+            index < members.length && (
+              <li key={monday}>
+                <span>{index % members.length}:</span>
+                <time dateTime={monday}>{monday}</time>
+              </li>
+            )
+        )}
+      </ul>
     </main>
   );
 }
