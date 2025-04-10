@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   addMonths,
   eachDayOfInterval,
@@ -65,6 +66,9 @@ export default function Home() {
               )
           )}
         </ul>
+      </section>
+      <section className="mt-10">
+        <Button>追加</Button>
       </section>
     </main>
   );
