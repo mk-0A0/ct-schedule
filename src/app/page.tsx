@@ -18,6 +18,7 @@ import {
   isMonday,
 } from "date-fns";
 import { ja } from "date-fns/locale";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -53,7 +54,8 @@ export default function Home() {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values.name);
+    setMembers([...members, values.name]);
+    form.reset();
   };
 
   return (
