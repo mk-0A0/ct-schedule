@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -147,9 +148,36 @@ export default function Home() {
       </section>
       <hr />
       <section className="max-w-md mx-auto">
+        <Form>
+          <form onSubmit={} className="space-y-4">
+            <FormField
+              control={}
+              name="members"
+              render={() => (
+                <FormItem>
+                  {members.map((member) => (
+                    <FormField
+                      key={member}
+                      control={}
+                      name="members"
+                      render={() => (
+                        <FormItem className="space-x-2 space-y-0">
+                          <FormControl>
+                            <Checkbox />
+                          </FormControl>
+                          <FormLabel>{member}</FormLabel>
+                        </FormItem>
+                      )}
+                    />
+                  ))}
+                </FormItem>
+              )}
+            />
         <Button type="submit" variant="destructive" className="w-full">
           メンバーを削除
         </Button>
+          </form>
+        </Form>
       </section>
     </main>
   );
