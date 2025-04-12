@@ -22,7 +22,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 export default function Home() {
-  const members = ["🐱", "🐶", "🐷", "🐭", "🐹"];
+  const [members, setMembers] = useState<string[]>([
+    "🐱",
+    "🐶",
+    "🐷",
+    "🐭",
+    "🐹",
+  ]);
   const membersWithEmpty = ["", ...members];
 
   const today = new Date();
