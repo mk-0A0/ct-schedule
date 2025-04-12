@@ -59,7 +59,7 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <main className="space-y-10">
       <section className="flex gap-10 justify-center mt-10">
         <table className="border-t border-l h-full">
           <tbody>
@@ -102,7 +102,7 @@ export default function Home() {
           )}
         </ul>
       </section>
-      <section className="mt-10">
+      <section className="max-w-md mx-auto">
         <Form {...form}>
           <form
             onSubmit={
@@ -110,7 +110,7 @@ export default function Home() {
                 ? form.handleSubmit(onSubmit)
                 : undefined
             }
-            className="space-y-4 max-w-md mx-auto"
+            className="space-y-4"
           >
             <FormField
               control={form.control}
