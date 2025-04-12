@@ -58,6 +58,17 @@ export default function Home() {
     form.reset();
   };
 
+  const deleteFormSchema = z.object({
+    members: z.array(z.string()),
+  });
+
+  const deleteForm = useForm<z.infer<typeof deleteFormSchema>>({
+    resolver: zodResolver(deleteFormSchema),
+    defaultValues: {
+      members: [],
+    },
+  });
+
   return (
     <main className="space-y-10">
       <section className="flex gap-10 justify-center mt-10">
