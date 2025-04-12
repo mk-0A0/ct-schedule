@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   addMonths,
   eachDayOfInterval,
@@ -9,6 +10,8 @@ import {
   isMonday,
 } from "date-fns";
 import { ja } from "date-fns/locale";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 export default function Home() {
   const members = ["🐱", "🐶", "🐷", "🐭", "🐹"];
@@ -23,6 +26,21 @@ export default function Home() {
   })
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
+
+  const formSchema = z.object({
+    name: z.string(),
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log(values.name);
+  };
 
   return (
     <main>
