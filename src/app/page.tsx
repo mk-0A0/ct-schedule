@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -94,16 +95,19 @@ export default function Home() {
         </ul>
       </section>
       <section className="mt-10">
-        <Form>
-          <form className="space-y-4 max-w-md mx-auto">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 max-w-md mx-auto"
+          >
             <FormField
-              control={}
+              control={form.control}
               name="name"
-              render={() => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>名前</FormLabel>
                   <FormControl>
-        <Input />
+                    <Input {...field} />
                   </FormControl>
                 </FormItem>
               )}
