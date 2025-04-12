@@ -105,7 +105,11 @@ export default function Home() {
       <section className="mt-10">
         <Form {...form}>
           <form
-            onSubmit={form.getValues().name !== "" ? form.handleSubmit(onSubmit) : undefined}
+            onSubmit={
+              form.getValues().name !== ""
+                ? form.handleSubmit(onSubmit)
+                : undefined
+            }
             className="space-y-4 max-w-md mx-auto"
           >
             <FormField
@@ -120,7 +124,11 @@ export default function Home() {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={!form.getValues().name} className="w-full">
+            <Button
+              type="submit"
+              disabled={!form.getValues().name}
+              className="w-full"
+            >
               追加
             </Button>
           </form>
