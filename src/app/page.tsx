@@ -1,4 +1,11 @@
 import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -87,8 +94,25 @@ export default function Home() {
         </ul>
       </section>
       <section className="mt-10">
+        <Form>
+          <form className="space-y-4 max-w-md mx-auto">
+            <FormField
+              control={}
+              name="name"
+              render={() => (
+                <FormItem>
+                  <FormLabel>名前</FormLabel>
+                  <FormControl>
         <Input />
-        <Button>追加</Button>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <Button type="submit" className="w-full">
+              追加
+            </Button>
+          </form>
+        </Form>
       </section>
     </main>
   );
