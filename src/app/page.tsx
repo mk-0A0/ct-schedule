@@ -134,6 +134,12 @@ export default function Home() {
           </form>
         </Form>
       </section>
+      <hr />
+      <section className="max-w-md mx-auto">
+        <Button type="submit" variant="destructive" className="w-full">
+          メンバーを削除
+        </Button>
+      </section>
     </main>
   );
 }
