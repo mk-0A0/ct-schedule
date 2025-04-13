@@ -72,6 +72,7 @@ export default function Home() {
 
   const onDelete = (values: z.infer<typeof deleteFormSchema>) => {
     setMembers(members.filter((member) => !values.members.includes(member)));
+    deleteForm.reset();
   };
 
   return (
