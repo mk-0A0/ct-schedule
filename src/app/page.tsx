@@ -191,7 +191,12 @@ export default function Home() {
                 </FormItem>
               )}
             />
-            <Button type="submit" variant="destructive" className="w-full">
+            <Button
+              disabled={!deleteForm.getValues().members.length}
+              type="submit"
+              variant="destructive"
+              className="w-full"
+            >
               メンバーを削除
             </Button>
           </form>
