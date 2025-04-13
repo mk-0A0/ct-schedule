@@ -70,6 +70,10 @@ export default function Home() {
     },
   });
 
+  const onDelete = (values: z.infer<typeof deleteFormSchema>) => {
+    setMembers(members.filter((member) => !values.members.includes(member)));
+  };
+
   return (
     <main className="space-y-10">
       <section className="flex gap-10 justify-center mt-10">
@@ -148,22 +152,36 @@ export default function Home() {
       </section>
       <hr />
       <section className="max-w-md mx-auto">
-        <Form>
-          <form onSubmit={} className="space-y-4">
+        <Form {...deleteForm}>
+          <form
+            onSubmit={deleteForm.handleSubmit(onDelete)}
+            className="space-y-4"
+          >
             <FormField
-              control={}
+              control={deleteForm.control}
               name="members"
               render={() => (
                 <FormItem>
                   {members.map((member) => (
                     <FormField
                       key={member}
-                      control={}
+                      control={deleteForm.control}
                       name="members"
-                      render={() => (
+                      render={({ field }) => (
                         <FormItem className="space-x-2 space-y-0">
                           <FormControl>
-                            <Checkbox />
+                            <Checkbox
+                              checked={field.value.includes(member)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([...field.value, member])
+                                  : field.onChange(
+                                      field.value.filter(
+                                        (value) => value !== member
+                                      )
+                                    );
+                              }}
+                            />
                           </FormControl>
                           <FormLabel>{member}</FormLabel>
                         </FormItem>
@@ -173,9 +191,9 @@ export default function Home() {
                 </FormItem>
               )}
             />
-        <Button type="submit" variant="destructive" className="w-full">
-          メンバーを削除
-        </Button>
+            <Button type="submit" variant="destructive" className="w-full">
+              メンバーを削除
+            </Button>
           </form>
         </Form>
       </section>
