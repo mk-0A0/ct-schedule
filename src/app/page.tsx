@@ -8,10 +8,14 @@ import {
 } from "date-fns";
 import { ja } from "date-fns/locale";
 
-export default async function Home() {
+async function getMemberData() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const data = await fetch(`${baseUrl}/api`);
-  const memberData = await data.json();
+  return data.json();
+}
+
+export default async function Home() {
+  const memberData = await getMemberData();
 
   const membersWithEmpty = ["", ...memberData.members];
 
