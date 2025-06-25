@@ -8,9 +8,16 @@ import {
 } from "date-fns";
 import { ja } from "date-fns/locale";
 
-export default function Home() {
-  const members = ["🐱", "🐶", "🐷", "🐭", "🐹"];
-  const membersWithEmpty = ["", ...members];
+async function getMemberData() {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const data = await fetch(`${baseUrl}/api`);
+  return data.json();
+}
+
+export default async function Home() {
+  const memberData = await getMemberData();
+
+  const membersWithEmpty = ["", ...memberData.members];
 
   const today = new Date();
   const thisMonth = getMonth(today) + 1;
@@ -29,7 +36,7 @@ export default function Home() {
           {membersWithEmpty.map((colMember, rowIndex) => (
             <tr key={`tr-${rowIndex}`} className="border-b">
               <th className="w-10 h-10 border-r">{colMember}</th>
-              {members.map((rowMember, colIndex) =>
+              {memberData.members.map((rowMember: string, colIndex: number) =>
                 rowIndex === 0 ? (
                   <th
                     key={`cell-th-${colIndex}`}
@@ -45,7 +52,7 @@ export default function Home() {
                     }`}
                   >
                     {/* rowIndexはmembersWithEmptyから取得しており、要素数が1つ多いため-1をしている */}
-                    {(colIndex + rowIndex - 1) % members.length}
+                    {(colIndex + rowIndex - 1) % memberData.members.length}
                   </td>
                 )
               )}
@@ -56,9 +63,9 @@ export default function Home() {
       <ul>
         {mondays.map(
           (monday, index) =>
-            index < members.length && (
+            index < memberData.members.length && (
               <li key={monday}>
-                <span>{index % members.length}:</span>
+                <span>{index % memberData.members.length}:</span>
                 <time dateTime={monday}>{monday}</time>
               </li>
             )
