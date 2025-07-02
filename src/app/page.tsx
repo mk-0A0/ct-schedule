@@ -11,7 +11,7 @@ import { ja } from "date-fns/locale";
 console.log(process.env.NEXT_PUBLIC_BASE_URL);
 async function getMemberData() {
   const baseUrl = "https://ct-schedule.vercel.app/";
-  const data = await fetch(`${baseUrl}/api`, { cache: "no-store" });
+  const data = await fetch(`${baseUrl}/api`, { cache: "force-cache" });
   return data.json();
 }
 
