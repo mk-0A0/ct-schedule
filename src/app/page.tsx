@@ -8,6 +8,7 @@ import {
 } from "date-fns";
 import { ja } from "date-fns/locale";
 
+console.log(process.env.NEXT_PUBLIC_BASE_URL);
 async function getMemberData() {
   const baseUrl = "https://ct-schedule.vercel.app/";
   const data = await fetch(`${baseUrl}/api`, { cache: "no-store" });
@@ -18,8 +19,6 @@ export default async function Home() {
   const memberData = await getMemberData();
 
   const membersWithEmpty = ["", ...memberData.members];
-
-  console.log(process.env.NEXT_PUBLIC_BASE_URL);
 
   const today = new Date();
   const thisMonth = getMonth(today) + 1;
