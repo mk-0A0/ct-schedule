@@ -10,7 +10,7 @@ import { ja } from "date-fns/locale";
 
 async function getMemberData() {
   const baseUrl =
-    process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL ||
+    `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}` ||
     "https://ct-schedule.vercel.app/";
   const data = await fetch(`${baseUrl}/api`);
   return data.json();
