@@ -19,6 +19,8 @@ export default async function Home() {
 
   const membersWithEmpty = ["", ...memberData.members];
 
+  console.log(process.env.NEXT_PUBLIC_BASE_URL);
+
   const today = new Date();
   const thisMonth = getMonth(today) + 1;
   const thisYear = getYear(today);
