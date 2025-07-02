@@ -10,13 +10,13 @@ import { ja } from "date-fns/locale";
 
 async function getMemberData() {
   const baseUrl = "https://ct-schedule.vercel.app/";
-  const data = await fetch(`${baseUrl}/api`, { cache: "force-cache" });
+  const data = await fetch(`${baseUrl}/api`, { cache: "no-cache" });
   return data.json();
 }
 
 export default async function Home() {
   console.log(process.env.NEXT_PUBLIC_BASE_URL);
-  
+
   const memberData = await getMemberData();
 
   const membersWithEmpty = ["", ...memberData.members];
