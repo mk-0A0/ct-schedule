@@ -8,7 +8,6 @@ import {
 } from "date-fns";
 import { ja } from "date-fns/locale";
 
-console.log(process.env.NEXT_PUBLIC_BASE_URL);
 async function getMemberData() {
   const baseUrl = "https://ct-schedule.vercel.app/";
   const data = await fetch(`${baseUrl}/api`, { cache: "force-cache" });
@@ -16,6 +15,8 @@ async function getMemberData() {
 }
 
 export default async function Home() {
+  console.log(process.env.NEXT_PUBLIC_BASE_URL);
+  
   const memberData = await getMemberData();
 
   const membersWithEmpty = ["", ...memberData.members];
@@ -29,7 +30,6 @@ export default async function Home() {
   })
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
-
   return (
     <main className="flex gap-10 justify-center mt-10">
       <table className="border-t border-l h-full">
