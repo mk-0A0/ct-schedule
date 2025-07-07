@@ -1,3 +1,4 @@
+import { Member } from "@/app/api/route";
 import {
   addMonths,
   eachDayOfInterval,
@@ -24,7 +25,7 @@ async function getMemberData() {
 }
 
 export default async function Home() {
-  const memberData = await getMemberData();
+  const memberData: { members: Member[] } = await getMemberData();
 
   const today = new Date();
   const thisMonth = getMonth(today) + 1;
@@ -35,21 +36,22 @@ export default async function Home() {
   })
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
+
   return (
     <main className="flex gap-10 justify-center mt-10">
       <table className="border-t border-l h-full">
         <tbody>
           {/* "": 左上の空マス */}
-          {["", ...memberData.members].map((colMember, rowIndex) => (
+          {[{ name: "" }, ...memberData.members].map((colMember, rowIndex) => (
             <tr key={`tr-${rowIndex}`} className="border-b">
-              <th className="w-10 h-10 border-r">{colMember}</th>
-              {memberData.members.map((rowMember: string, colIndex: number) =>
+              <th className="w-10 h-10 border-r">{colMember.name}</th>
+              {memberData.members.map((rowMember, colIndex) =>
                 rowIndex === 0 ? (
                   <th
                     key={`cell-th-${colIndex}`}
                     className="w-10 h-10 border-r"
                   >
-                    {rowMember}
+                    {rowMember.name}
                   </th>
                 ) : (
                   <td
