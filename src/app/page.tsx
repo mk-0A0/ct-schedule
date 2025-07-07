@@ -10,19 +10,20 @@ import { ja } from "date-fns/locale";
 
 async function getMemberData() {
   const baseUrl =
-    `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}` ||
-    "http://localhost:3000";
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
 
   const data = await fetch(`${baseUrl}/api`, {
     headers: {
       "x-vercel-protection-bypass": `${process.env.VERCEL_AUTOMATION_BYPASS_SECRET}`,
     },
   });
+  console.log("baseUrl", baseUrl);
   return data.json();
 }
 
 export default async function Home() {
-
   const memberData = await getMemberData();
 
   const membersWithEmpty = ["", ...memberData.members];
