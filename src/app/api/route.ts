@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  return NextResponse.json({ members: ["🐱", "🐶", "🐷", "🐭", "🐹"] });
+  const members = ["🐱", "🐶", "🐷", "🐭", "🐹"];
+  return NextResponse.json({ members });
 }
