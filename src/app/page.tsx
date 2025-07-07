@@ -22,7 +22,6 @@ async function getMemberData() {
 }
 
 export default async function Home() {
-  console.log(process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL);
 
   const memberData = await getMemberData();
 
