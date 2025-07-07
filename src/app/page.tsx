@@ -26,8 +26,6 @@ async function getMemberData() {
 export default async function Home() {
   const memberData = await getMemberData();
 
-  const membersWithEmpty = ["", ...memberData.members];
-
   const today = new Date();
   const thisMonth = getMonth(today) + 1;
   const thisYear = getYear(today);
@@ -41,7 +39,8 @@ export default async function Home() {
     <main className="flex gap-10 justify-center mt-10">
       <table className="border-t border-l h-full">
         <tbody>
-          {membersWithEmpty.map((colMember, rowIndex) => (
+          {/* "": 左上の空マス */}
+          {["", ...memberData.members].map((colMember, rowIndex) => (
             <tr key={`tr-${rowIndex}`} className="border-b">
               <th className="w-10 h-10 border-r">{colMember}</th>
               {memberData.members.map((rowMember: string, colIndex: number) =>
@@ -59,7 +58,7 @@ export default async function Home() {
                       rowIndex - 1 === colIndex && "bg-gray-100"
                     }`}
                   >
-                    {/* rowIndexはmembersWithEmptyから取得しており、要素数が1つ多いため-1をしている */}
+                    {/* rowIndexは空マス分要素数が1つ多いため-1をしている */}
                     {(colIndex + rowIndex - 1) % memberData.members.length}
                   </td>
                 )
