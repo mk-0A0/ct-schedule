@@ -19,7 +19,7 @@ async function getMemberData() {
       "x-vercel-protection-bypass": `${process.env.VERCEL_AUTOMATION_BYPASS_SECRET}`,
     },
   });
-  console.log("baseUrl", baseUrl);
+
   return data.json();
 }
 
