@@ -15,7 +15,7 @@ async function getMemberData() {
       ? "http://localhost:3000"
       : process.env.VERCEL_ENV === "preview"
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
-      : process.env.NEXT_PUBLIC_BASE_URL;
+      : process.env.NEXT_PUBLIC_VERCEL_URL;
 
   const data = await fetch(`${baseUrl}/api`, {
     headers: {
