@@ -29,10 +29,10 @@ async function getMemberData() {
   //   if (process.env.VERCEL_ENV === "preview") {
   //     return `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
   //   }
-  //   return process.env.NEXT_PUBLIC_BASE_URL!;
+  //   return process.env.NEXT_PUBLIC_VERCEL_URL!;
   // }
 
-  const data = await fetch(`https://ct-schedule.vercel.app/api`, {
+  const data = await fetch(`/api`, {
     headers: {
       "x-vercel-protection-bypass": `${process.env.VERCEL_AUTOMATION_BYPASS_SECRET}`,
     },
