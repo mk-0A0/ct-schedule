@@ -32,7 +32,7 @@ async function getMemberData() {
     return process.env.NEXT_PUBLIC_BASE_URL!;
   }
 
-  const data = await fetch(`${getBaseUrl()}/api`, {
+  const data = await fetch(`https://ct-schedule.vercel.app/api`, {
     headers: {
       "x-vercel-protection-bypass": `${process.env.VERCEL_AUTOMATION_BYPASS_SECRET}`,
     },
