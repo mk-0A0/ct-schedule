@@ -22,15 +22,15 @@ async function getMemberData() {
   //     ? "http://localhost:3000"
   //     : `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
 
-  function getBaseUrl() {
-    if (process.env.NODE_ENV === "development") {
-      return "http://localhost:3000";
-    }
-    if (process.env.VERCEL_ENV === "preview") {
-      return `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
-    }
-    return process.env.NEXT_PUBLIC_BASE_URL!;
-  }
+  // function getBaseUrl() {
+  //   if (process.env.NODE_ENV === "development") {
+  //     return "http://localhost:3000";
+  //   }
+  //   if (process.env.VERCEL_ENV === "preview") {
+  //     return `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
+  //   }
+  //   return process.env.NEXT_PUBLIC_BASE_URL!;
+  // }
 
   const data = await fetch(`https://ct-schedule.vercel.app/api`, {
     headers: {
