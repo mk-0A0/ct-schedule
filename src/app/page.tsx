@@ -10,12 +10,17 @@ import {
 import { ja } from "date-fns/locale";
 
 async function getMemberData() {
+  // const baseUrl =
+  // process.env.NODE_ENV === 'development'
+  //   ? 'http://localhost:3000'
+  //   : process.env.VERCEL_ENV === 'preview'
+  //     ? `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
+  //     : process.env.NEXT_PUBLIC_BASE_URL // production
+
   const baseUrl =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : process.env.VERCEL_ENV === "preview"
-      ? `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
-      : process.env.NEXT_PUBLIC_VERCEL_URL;
+      : `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
 
   const data = await fetch(`${baseUrl}/api`, {
     headers: {
