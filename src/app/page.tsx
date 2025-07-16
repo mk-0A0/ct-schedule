@@ -29,7 +29,7 @@ async function getMemberData() {
     if (process.env.VERCEL_ENV === "preview") {
       return `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
     }
-    return process.env.NEXT_PUBLIC_VERCEL_URL!;
+    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL!}`;
   }
   console.log("baseUrl:", getBaseUrl());
 
