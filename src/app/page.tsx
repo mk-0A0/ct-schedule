@@ -34,6 +34,7 @@ async function getMemberData() {
   console.log("baseUrl:", getBaseUrl());
 
   const data = await fetch(`${getBaseUrl()}/api`, {
+    cache: "no-store",
     headers: {
       "x-vercel-protection-bypass": `${process.env.VERCEL_AUTOMATION_BYPASS_SECRET}`,
     },
