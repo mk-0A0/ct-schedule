@@ -44,7 +44,8 @@ export default async function Home() {
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
 
   return (
-    <main className="max-w-7xl mx-auto p-10">
+    <main className="max-w-7xl mx-auto">
+      <article className="p-10">
       <p>現在の参加者：{memberData.members.length}人</p>
       <p className="text-gray-500 text-sm">
         ・参加人数が奇数： グレーアウトしたマスがお休み
@@ -52,6 +53,7 @@ export default async function Home() {
       <p className="text-gray-500 text-sm">
         ・参加人数が偶数： 自分と数字・背景色が同じマスのメンバーとペアになる
       </p>
+      </article>
       <article className="flex gap-10 mt-10">
         <table className="border-t border-l h-full">
           <tbody>
