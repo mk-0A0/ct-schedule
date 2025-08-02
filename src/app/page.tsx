@@ -57,6 +57,7 @@ export default async function Home() {
 
   return (
     <main className="max-w-7xl mx-auto">
+      <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
       <article className="p-10">
         <p>現在の参加者：{memberData.members.length}人</p>
         <p className="text-gray-500 text-sm">
