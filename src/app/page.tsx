@@ -58,13 +58,13 @@ export default async function Home() {
   return (
     <main className="max-w-7xl mx-auto">
       <article className="p-10">
-      <p>現在の参加者：{memberData.members.length}人</p>
-      <p className="text-gray-500 text-sm">
-        ・参加人数が奇数： グレーアウトしたマスがお休み
-      </p>
-      <p className="text-gray-500 text-sm">
-        ・参加人数が偶数： 自分と数字・背景色が同じマスのメンバーとペアになる
-      </p>
+        <p>現在の参加者：{memberData.members.length}人</p>
+        <p className="text-gray-500 text-sm">
+          ・参加人数が奇数： グレーアウトしたマスがお休み
+        </p>
+        <p className="text-gray-500 text-sm">
+          ・参加人数が偶数： 自分と数字・背景色が同じマスのメンバーとペアになる
+        </p>
       </article>
       <article className="flex">
         <aside className="p-5">
@@ -96,7 +96,7 @@ export default async function Home() {
                     ) : (
                       <td
                         key={`cell-${colIndex}`}
-                        className={`w-10 h-10 border-r text-center ${
+                        className={`border-r text-center text-gray-500 ${
                           rowIndex - 1 === colIndex && "bg-gray-100"
                         }`}
                       >
