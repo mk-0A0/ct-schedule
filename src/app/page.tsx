@@ -56,19 +56,22 @@ export default async function Home() {
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
 
   return (
-    <main className="max-w-7xl mx-auto">
-      <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
-      <article className="p-10">
-        <p>現在の参加者：{memberData.members.length}人</p>
-        <p className="text-gray-500 text-sm">
-          ・参加人数が奇数： グレーアウトしたマスがお休み
-        </p>
-        <p className="text-gray-500 text-sm">
-          ・参加人数が偶数： 自分と数字・背景色が同じマスのメンバーとペアになる
-        </p>
-      </article>
-      <article className="flex">
-        <aside className="p-5">
+    <main className="max-w-7xl mx-auto p-10">
+      <div className="grid gap-5">
+        <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
+        <section>
+          <p>現在の参加者：{memberData.members.length}人</p>
+          <p className="text-gray-500 text-sm">
+            ・参加人数が奇数： グレーアウトしたマスはお休み
+          </p>
+          <p className="text-gray-500 text-sm">
+            ・参加人数が偶数：
+            自分と数字・背景色が同じマスのメンバーとペアになる
+          </p>
+        </section>
+      </div>
+      <article className="flex gap-5 mt-10">
+        <aside>
           <ol>
             {mondays.map(
               (monday, index) =>
