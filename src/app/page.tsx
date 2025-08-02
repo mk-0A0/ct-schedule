@@ -30,6 +30,18 @@ async function getMemberData() {
   return data.json();
 }
 
+const MemberCell = ({ name }: { name: string }) => {
+  return (
+    <th className="border-r text-sm p-1 font-normal">
+      <div className="w-[100px]">
+        <span className="block text-xs text-gray-700 leading-none font-bold">
+          {name}
+        </span>
+      </div>
+    </th>
+  );
+};
+
 export default async function Home() {
   const memberData: { members: Member[] } = await getMemberData();
 
@@ -74,15 +86,13 @@ export default async function Home() {
             {[{ name: "" }, ...memberData.members].map(
               (colMember, rowIndex) => (
                 <tr key={`tr-${rowIndex}`} className="border-b">
-                  <th className="w-10 h-10 border-r">{colMember.name}</th>
+                  <MemberCell name={colMember.name} />
                   {memberData.members.map((rowMember, colIndex) =>
                     rowIndex === 0 ? (
-                      <th
+                      <MemberCell
+                        name={rowMember.name}
                         key={`cell-th-${colIndex}`}
-                        className="w-10 h-10 border-r"
-                      >
-                        {rowMember.name}
-                      </th>
+                      />
                     ) : (
                       <td
                         key={`cell-${colIndex}`}
