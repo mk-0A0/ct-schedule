@@ -32,7 +32,7 @@ async function getMemberData() {
 
 const MemberCell = ({ name }: { name: string }) => {
   return (
-    <th className="border-r text-sm p-1 font-normal">
+    <th className="border-r text-sm p-1 font-normal bg-gray-100">
       <div className="w-[100px]">
         <span className="block text-xs text-gray-700 leading-none font-bold">
           {name}
