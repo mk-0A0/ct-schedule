@@ -54,7 +54,20 @@ export default async function Home() {
         ・参加人数が偶数： 自分と数字・背景色が同じマスのメンバーとペアになる
       </p>
       </article>
-      <article className="flex gap-10 mt-10">
+      <article className="flex">
+        <aside className="p-5">
+          <ol>
+            {mondays.map(
+              (monday, index) =>
+                index < memberData.members.length && (
+                  <li key={monday}>
+                    <span>{index % memberData.members.length}:</span>
+                    <time dateTime={monday}>{monday}</time>
+                  </li>
+                )
+            )}
+          </ol>
+        </aside>
         <table className="border-t border-l h-full">
           <tbody>
             {/* "": 左上の空マス */}
@@ -87,17 +100,6 @@ export default async function Home() {
             )}
           </tbody>
         </table>
-        <ul>
-          {mondays.map(
-            (monday, index) =>
-              index < memberData.members.length && (
-                <li key={monday}>
-                  <span>{index % memberData.members.length}:</span>
-                  <time dateTime={monday}>{monday}</time>
-                </li>
-              )
-          )}
-        </ul>
       </article>
     </main>
   );
