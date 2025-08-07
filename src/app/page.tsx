@@ -61,12 +61,13 @@ export default async function Home() {
         <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
         <section>
           <p>現在の参加者：{memberData.members.length}人</p>
+          <p className="mt-4 text-sm">グレーアウトしたマスの扱いについて</p>
           <p className="text-gray-500 text-sm">
             ・参加人数が奇数： グレーアウトしたマスはお休み
           </p>
           <p className="text-gray-500 text-sm">
             ・参加人数が偶数：
-            自分と数字・背景色が同じマスのメンバーとペアになる
+            自分がグレーアウトしたマスの場合、同じくグレーかつ数字が同じメンバーとペアになる
           </p>
         </section>
       </div>
