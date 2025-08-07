@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CT Schedule",
-  description: "CT Schedule",
+  title: "CT組み合わせ表",
+  description: "毎週月曜14:00〜実施のCT組み合わせ一覧",
 };
 
 export default function RootLayout({
