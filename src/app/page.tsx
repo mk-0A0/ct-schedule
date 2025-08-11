@@ -1,12 +1,5 @@
 import { Member } from "@/app/api/route";
-import {
-  addMonths,
-  eachDayOfInterval,
-  format,
-  getMonth,
-  getYear,
-  isMonday,
-} from "date-fns";
+import { eachDayOfInterval, format, isMonday } from "date-fns";
 import { ja } from "date-fns/locale";
 
 async function getMemberData() {
@@ -45,12 +38,9 @@ const MemberCell = ({ name }: { name: string }) => {
 export default async function Home() {
   const memberData: { members: Member[] } = await getMemberData();
 
-  const today = new Date();
-  const thisMonth = getMonth(today) + 1;
-  const thisYear = getYear(today);
   const mondays = eachDayOfInterval({
-    start: new Date(`${thisYear}-${thisMonth}-01`),
-    end: addMonths(new Date(`${thisYear}-${thisMonth}-31`), 2),
+    start: new Date("2025-08-01"),
+    end: new Date("2026-12-31"),
   })
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
