@@ -1,5 +1,11 @@
 import { Member } from "@/app/api/route";
-import { eachDayOfInterval, format, isMonday } from "date-fns";
+import {
+  eachDayOfInterval,
+  format,
+  isBefore,
+  isMonday,
+  startOfDay,
+} from "date-fns";
 import { ja } from "date-fns/locale";
 
 async function getMemberData() {
@@ -67,7 +73,15 @@ export default async function Home() {
             {mondays.map(
               (monday, index) =>
                 index < memberData.members.length && (
-                  <li key={monday}>
+                  <li
+                    key={monday}
+                    className={
+                      // mondayが今日以前であればグレーアウト
+                      isBefore(monday, startOfDay(new Date()))
+                        ? "bg-gray-300"
+                        : ""
+                    }
+                  >
                     <span>{index % memberData.members.length}:</span>
                     <time dateTime={monday}>{monday}</time>
                   </li>
