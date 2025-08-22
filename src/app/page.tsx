@@ -1,3 +1,4 @@
+import { signIn } from "@/auth";
 import { getMember } from "@/app/actions";
 import { AddMemberFormDialog } from "@/components/AddMemberFormDialog";
 import {
@@ -41,6 +42,19 @@ export default async function Home() {
 
   return (
     <main className="max-w-7xl mx-auto p-10">
+      <form
+        action={async () => {
+          "use server";
+          await signIn("slack");
+        }}
+      >
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Signin with Slack
+        </button>
+      </form>
       <div className="grid gap-5">
         <div className="flex justify-between items-center gap-10">
           <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
