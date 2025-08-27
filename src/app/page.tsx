@@ -1,4 +1,4 @@
-import { getData } from "@/app/actions";
+import { getMember } from "@/app/actions";
 import { Member } from "@/app/api/route";
 import {
   eachDayOfInterval,
@@ -52,7 +52,7 @@ export default async function Home() {
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
 
-  const memberDataNew = await getData();
+  const memberDataNew = await getMember();
 
   return (
     <main className="max-w-7xl mx-auto p-10">
