@@ -1,3 +1,4 @@
+import { getData } from "@/app/actions";
 import { Member } from "@/app/api/route";
 import {
   eachDayOfInterval,
@@ -51,8 +52,17 @@ export default async function Home() {
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
 
+  const memberDataNew = await getData();
+
   return (
     <main className="max-w-7xl mx-auto p-10">
+      {memberDataNew.map((member) => (
+        <div key={member.id}>
+          <span>{member.id} </span>
+          <span>{member.name}: </span>
+          <span>{String(member.participate)}</span>
+        </div>
+      ))}
       <div className="grid gap-5">
         <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
         <section>
