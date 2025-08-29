@@ -2,6 +2,20 @@
 
 import { addMember } from "@/app/actions";
 import { useRouter } from "next/navigation";
+import { Button } from "@/app/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/app/components/ui/dialog";
+import { Input } from "@/app/components/ui/input";
+import { Label } from "@/app/components/ui/label";
+import { Checkbox } from "@/app/components/ui/checkbox";
 
 export const AddMemberForm = () => {
   const router = useRouter();
@@ -18,21 +32,36 @@ export const AddMemberForm = () => {
   };
 
   return (
-    <form action={handleSubmit}>
-      <div>
-        <label htmlFor="name">名前</label>
-        <input name="name" type="text" id="name" required />
-      </div>
-      <div>
-        <input
-          name="participate"
-          type="checkbox"
-          id="participate"
-          defaultChecked
-        />
-        <label htmlFor="participate">CT参加メンバーとして追加</label>
-      </div>
-      <button type="submit">追加</button>
-    </form>
+    <Dialog>
+      <form action={handleSubmit}>
+        <DialogTrigger asChild>
+          <Button variant="outline">メンバーを追加</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>メンバーを追加</DialogTitle>
+            <DialogDescription>
+              CTに追加するメンバーを入力してください
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="name">名前</Label>
+              <Input name="name" type="text" id="name" required />
+            </div>
+            <div className="flex items-center gap-2">
+              <Checkbox name="participate" id="participate" defaultChecked />
+              <Label htmlFor="participate">CT参加メンバーとして追加</Label>
+            </div>
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">キャンセル</Button>
+            </DialogClose>
+            <Button type="submit">追加</Button>
+          </DialogFooter>
+        </DialogContent>
+      </form>
+    </Dialog>
   );
 };
