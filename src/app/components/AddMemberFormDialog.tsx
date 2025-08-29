@@ -17,7 +17,7 @@ import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import { Checkbox } from "@/app/components/ui/checkbox";
 
-export const AddMemberForm = () => {
+export const AddMemberFormDialog = () => {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
