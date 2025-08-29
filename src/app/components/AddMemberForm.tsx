@@ -1,11 +1,15 @@
 "use client";
 
 import { addMember } from "@/app/actions";
+import { useRouter } from "next/navigation";
 
 export const AddMemberForm = () => {
+  const router = useRouter();
+
   const handleSubmit = async (formData: FormData) => {
     try {
       const member = await addMember(formData);
+      router.refresh();
       alert(`${member.name} を追加しました`);
     } catch (error) {
       alert("失敗しました");
