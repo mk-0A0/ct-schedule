@@ -1,8 +1,20 @@
 "use client";
 
+import { addMember } from "@/app/actions";
+
 export const AddMemberForm = () => {
+  const handleSubmit = async (formData: FormData) => {
+    try {
+      const member = await addMember(formData);
+      alert(`${member.name} を追加しました`);
+    } catch (error) {
+      alert("失敗しました");
+      console.error("Error adding member:", error);
+    }
+  };
+
   return (
-    <form>
+    <form action={handleSubmit}>
       <div>
         <label htmlFor="name">名前</label>
         <input name="name" type="text" id="name" required />
