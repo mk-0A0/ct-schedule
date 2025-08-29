@@ -1,5 +1,6 @@
 import { getMember } from "@/app/actions";
 import { Member } from "@/app/api/route";
+import { AddMemberForm } from "@/app/components/AddMemberForm";
 import {
   eachDayOfInterval,
   format,
@@ -63,6 +64,7 @@ export default async function Home() {
           <span>{String(member.participate)}</span>
         </div>
       ))}
+      <AddMemberForm />
       <div className="grid gap-5">
         <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
         <section>
