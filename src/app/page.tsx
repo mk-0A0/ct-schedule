@@ -32,6 +32,9 @@ export default async function Home() {
 
   const memberData = await getMember();
 
+  // 不参加のメンバーを除外
+  const member = memberData.filter((member) => member.participate);
+
   return (
     <main className="max-w-7xl mx-auto p-10">
       {/* メンバー追加の操作後に表示されるToast */}
@@ -42,7 +45,7 @@ export default async function Home() {
           <AddMemberFormDialog />
         </div>
         <section>
-          <p>現在の参加者：{memberData.length}人</p>
+          <p>現在の参加者：{member.length}人</p>
           <p className="mt-4 text-sm">グレーアウトしたマスの扱いについて</p>
           <p className="text-gray-500 text-sm">
             ・参加人数が奇数： グレーアウトしたマスはお休み
@@ -58,7 +61,7 @@ export default async function Home() {
           <ol>
             {mondays.map(
               (monday, index) =>
-                index < memberData.length && (
+                index < member.length && (
                   <li
                     key={monday}
                     className={
@@ -68,7 +71,7 @@ export default async function Home() {
                         : ""
                     }
                   >
-                    <span>{index % memberData.length}:</span>
+                    <span>{index % member.length}:</span>
                     <time dateTime={monday}>{monday}</time>
                   </li>
                 )
@@ -78,10 +81,10 @@ export default async function Home() {
         <table className="border-t border-l h-full">
           <tbody>
             {/* "": 左上の空マス */}
-            {[{ name: "" }, ...memberData].map((colMember, rowIndex) => (
+            {[{ name: "" }, ...member].map((colMember, rowIndex) => (
               <tr key={`tr-${rowIndex}`} className="border-b">
                 <MemberCell name={colMember.name} />
-                {memberData.map((rowMember, colIndex) =>
+                {member.map((rowMember, colIndex) =>
                   rowIndex === 0 ? (
                     <MemberCell
                       name={rowMember.name}
@@ -95,7 +98,7 @@ export default async function Home() {
                       }`}
                     >
                       {/* rowIndexは空マス分要素数が1つ多いため-1をしている */}
-                      {(colIndex + rowIndex - 1) % memberData.length}
+                      {(colIndex + rowIndex - 1) % member.length}
                     </td>
                   )
                 )}
