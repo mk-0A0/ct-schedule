@@ -22,10 +22,13 @@ import { toast } from "sonner";
 export const AddMemberFormDialog = () => {
   const router = useRouter();
   const [name, setName] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = async (formData: FormData) => {
     try {
       const member = await addMember(formData);
+      setOpen(false);
+      setName("");
       toast.success(`${member.name} を追加しました`);
       router.refresh();
     } catch (error) {
@@ -36,8 +39,10 @@ export const AddMemberFormDialog = () => {
 
   return (
     <Dialog
+      open={open}
       onOpenChange={(open) => {
         if (!open) setName("");
+        setOpen(open);
       }}
     >
       <DialogTrigger asChild>
@@ -72,11 +77,9 @@ export const AddMemberFormDialog = () => {
             <DialogClose asChild>
               <Button variant="outline">キャンセル</Button>
             </DialogClose>
-            <DialogClose asChild>
-              <Button type="submit" disabled={!name}>
-                追加
-              </Button>
-            </DialogClose>
+            <Button type="submit" disabled={!name}>
+              追加
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
