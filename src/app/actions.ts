@@ -6,9 +6,9 @@ function getDataBaseUrl() {
     return `${process.env.DATABASE_URL_DEV}`;
   }
   if (process.env.VERCEL_ENV === "preview") {
-    return `${process.env.NEXT_PUBLIC_DATABASE_URL_DEV}`;
+    return `${process.env.DATABASE_URL_DEV}`;
   }
-  return `${process.env.NEXT_PUBLIC_DATABASE_URL}`;
+  return `${process.env.DATABASE_URL}`;
 }
 
 const sql = neon(getDataBaseUrl());
