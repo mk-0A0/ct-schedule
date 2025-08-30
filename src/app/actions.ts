@@ -14,7 +14,10 @@ function getDataBaseUrl() {
 const sql = neon(getDataBaseUrl());
 
 export async function getMember() {
-  const data = await sql`SELECT * FROM public.member`;
+  const data = await sql`
+    SELECT * FROM public.member
+    ORDER BY id ASC
+  `;
   return data;
 }
 
