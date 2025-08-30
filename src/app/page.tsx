@@ -45,8 +45,6 @@ const MemberCell = ({ name }: { name: string }) => {
 };
 
 export default async function Home() {
-  const memberData: { members: Member[] } = await getMemberData();
-
   const mondays = eachDayOfInterval({
     start: new Date("2025-08-01"),
     end: new Date("2026-12-31"),
@@ -54,7 +52,7 @@ export default async function Home() {
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
 
-  const memberDataNew = await getMember();
+  const memberData = await getMember();
 
   return (
     <main className="max-w-7xl mx-auto p-10">
@@ -73,7 +71,7 @@ export default async function Home() {
           <AddMemberFormDialog />
         </div>
         <section>
-          <p>現在の参加者：{memberData.members.length}人</p>
+          <p>現在の参加者：{memberData.length}人</p>
           <p className="mt-4 text-sm">グレーアウトしたマスの扱いについて</p>
           <p className="text-gray-500 text-sm">
             ・参加人数が奇数： グレーアウトしたマスはお休み
@@ -89,7 +87,7 @@ export default async function Home() {
           <ol>
             {mondays.map(
               (monday, index) =>
-                index < memberData.members.length && (
+                index < memberData.length && (
                   <li
                     key={monday}
                     className={
@@ -99,7 +97,7 @@ export default async function Home() {
                         : ""
                     }
                   >
-                    <span>{index % memberData.members.length}:</span>
+                    <span>{index % memberData.length}:</span>
                     <time dateTime={monday}>{monday}</time>
                   </li>
                 )
@@ -109,11 +107,10 @@ export default async function Home() {
         <table className="border-t border-l h-full">
           <tbody>
             {/* "": 左上の空マス */}
-            {[{ name: "" }, ...memberData.members].map(
-              (colMember, rowIndex) => (
+            {[{ name: "" }, ...memberData].map((colMember, rowIndex) => (
                 <tr key={`tr-${rowIndex}`} className="border-b">
                   <MemberCell name={colMember.name} />
-                  {memberData.members.map((rowMember, colIndex) =>
+                {memberData.map((rowMember, colIndex) =>
                     rowIndex === 0 ? (
                       <MemberCell
                         name={rowMember.name}
@@ -127,7 +124,7 @@ export default async function Home() {
                         }`}
                       >
                         {/* rowIndexは空マス分要素数が1つ多いため-1をしている */}
-                        {(colIndex + rowIndex - 1) % memberData.members.length}
+                      {(colIndex + rowIndex - 1) % memberData.length}
                       </td>
                     )
                   )}
