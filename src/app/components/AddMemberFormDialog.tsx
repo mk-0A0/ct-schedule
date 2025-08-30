@@ -33,11 +33,11 @@ export const AddMemberFormDialog = () => {
 
   return (
     <Dialog>
-      <form action={handleSubmit}>
-        <DialogTrigger asChild>
-          <Button variant="outline">メンバーを追加</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+      <DialogTrigger asChild>
+        <Button variant="outline">メンバーを追加</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <form action={handleSubmit}>
           <DialogHeader>
             <DialogTitle>メンバーを追加</DialogTitle>
             <DialogDescription>
@@ -60,8 +60,8 @@ export const AddMemberFormDialog = () => {
             </DialogClose>
             <Button type="submit">追加</Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 };
