@@ -1,5 +1,6 @@
 import { getMember } from "@/app/actions";
-import { Member } from "@/app/api/route";
+import { AddMemberFormDialog } from "@/app/components/AddMemberFormDialog";
+import { Toaster } from "@/app/components/ui/sonner";
 import {
   eachDayOfInterval,
   format,
@@ -9,32 +10,11 @@ import {
 } from "date-fns";
 import { ja } from "date-fns/locale";
 
-async function getMemberData() {
-  function getBaseUrl() {
-    if (process.env.NODE_ENV === "development") {
-      return "http://localhost:3000";
-    }
-    if (process.env.VERCEL_ENV === "preview") {
-      return `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
-    }
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL!}`;
-  }
-
-  const data = await fetch(`${getBaseUrl()}/api`, {
-    cache: "no-store",
-    headers: {
-      "x-vercel-protection-bypass": `${process.env.VERCEL_AUTOMATION_BYPASS_SECRET}`,
-    },
-  });
-
-  return data.json();
-}
-
 const MemberCell = ({ name }: { name: string }) => {
   return (
     <th className="border-r text-sm p-1 font-normal bg-gray-100">
       <div className="w-[100px]">
-        <span className="block text-xs text-gray-700 leading-none font-bold">
+        <span className="block text-xs text-gray-700 leading-none font-bold break-words">
           {name}
         </span>
       </div>
@@ -43,8 +23,6 @@ const MemberCell = ({ name }: { name: string }) => {
 };
 
 export default async function Home() {
-  const memberData: { members: Member[] } = await getMemberData();
-
   const mondays = eachDayOfInterval({
     start: new Date("2025-08-01"),
     end: new Date("2026-12-31"),
@@ -52,21 +30,22 @@ export default async function Home() {
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
 
-  const memberDataNew = await getMember();
+  const memberData = await getMember();
+
+  // 不参加のメンバーを除外
+  const member = memberData.filter((member) => member.participate);
 
   return (
     <main className="max-w-7xl mx-auto p-10">
-      {memberDataNew.map((member) => (
-        <div key={member.id}>
-          <span>{member.id} </span>
-          <span>{member.name}: </span>
-          <span>{String(member.participate)}</span>
-        </div>
-      ))}
+      {/* メンバー追加の操作後に表示されるToast */}
+      <Toaster position="top-center" />
       <div className="grid gap-5">
-        <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
+        <div className="flex justify-between items-center gap-10">
+          <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
+          <AddMemberFormDialog />
+        </div>
         <section>
-          <p>現在の参加者：{memberData.members.length}人</p>
+          <p>現在の参加者：{member.length}人</p>
           <p className="mt-4 text-sm">グレーアウトしたマスの扱いについて</p>
           <p className="text-gray-500 text-sm">
             ・参加人数が奇数： グレーアウトしたマスはお休み
@@ -82,7 +61,7 @@ export default async function Home() {
           <ol>
             {mondays.map(
               (monday, index) =>
-                index < memberData.members.length && (
+                index < member.length && (
                   <li
                     key={monday}
                     className={
@@ -92,7 +71,7 @@ export default async function Home() {
                         : ""
                     }
                   >
-                    <span>{index % memberData.members.length}:</span>
+                    <span>{index % member.length}:</span>
                     <time dateTime={monday}>{monday}</time>
                   </li>
                 )
@@ -102,31 +81,29 @@ export default async function Home() {
         <table className="border-t border-l h-full">
           <tbody>
             {/* "": 左上の空マス */}
-            {[{ name: "" }, ...memberData.members].map(
-              (colMember, rowIndex) => (
-                <tr key={`tr-${rowIndex}`} className="border-b">
-                  <MemberCell name={colMember.name} />
-                  {memberData.members.map((rowMember, colIndex) =>
-                    rowIndex === 0 ? (
-                      <MemberCell
-                        name={rowMember.name}
-                        key={`cell-th-${colIndex}`}
-                      />
-                    ) : (
-                      <td
-                        key={`cell-${colIndex}`}
-                        className={`border-r text-center text-gray-500 ${
-                          rowIndex - 1 === colIndex && "bg-gray-100"
-                        }`}
-                      >
-                        {/* rowIndexは空マス分要素数が1つ多いため-1をしている */}
-                        {(colIndex + rowIndex - 1) % memberData.members.length}
-                      </td>
-                    )
-                  )}
-                </tr>
-              )
-            )}
+            {[{ name: "" }, ...member].map((colMember, rowIndex) => (
+              <tr key={`tr-${rowIndex}`} className="border-b">
+                <MemberCell name={colMember.name} />
+                {member.map((rowMember, colIndex) =>
+                  rowIndex === 0 ? (
+                    <MemberCell
+                      name={rowMember.name}
+                      key={`cell-th-${colIndex}`}
+                    />
+                  ) : (
+                    <td
+                      key={`cell-${colIndex}`}
+                      className={`border-r text-center text-gray-500 ${
+                        rowIndex - 1 === colIndex && "bg-gray-100"
+                      }`}
+                    >
+                      {/* rowIndexは空マス分要素数が1つ多いため-1をしている */}
+                      {(colIndex + rowIndex - 1) % member.length}
+                    </td>
+                  )
+                )}
+              </tr>
+            ))}
           </tbody>
         </table>
       </article>
