@@ -67,9 +67,11 @@ export default async function Home() {
           <span>{String(member.participate)}</span>
         </div>
       ))}
-      <AddMemberFormDialog />
       <div className="grid gap-5">
-        <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
+        <div className="flex justify-between items-center gap-10">
+          <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
+          <AddMemberFormDialog />
+        </div>
         <section>
           <p>現在の参加者：{memberData.members.length}人</p>
           <p className="mt-4 text-sm">グレーアウトしたマスの扱いについて</p>
