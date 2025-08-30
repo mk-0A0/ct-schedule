@@ -1,6 +1,7 @@
 import { getMember } from "@/app/actions";
 import { Member } from "@/app/api/route";
 import { AddMemberFormDialog } from "@/app/components/AddMemberFormDialog";
+import { Toaster } from "@/app/components/ui/sonner";
 import {
   eachDayOfInterval,
   format,
@@ -57,6 +58,8 @@ export default async function Home() {
 
   return (
     <main className="max-w-7xl mx-auto p-10">
+      {/* メンバー追加の操作後に表示されるToast */}
+      <Toaster position="top-center" />
       {memberDataNew.map((member) => (
         <div key={member.id}>
           <span>{member.id} </span>

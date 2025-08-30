@@ -17,6 +17,7 @@ import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import { Checkbox } from "@/app/components/ui/checkbox";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export const AddMemberFormDialog = () => {
   const router = useRouter();
@@ -25,10 +26,10 @@ export const AddMemberFormDialog = () => {
   const handleSubmit = async (formData: FormData) => {
     try {
       const member = await addMember(formData);
+      toast.success(`${member.name} を追加しました`);
       router.refresh();
-      alert(`${member.name} を追加しました`);
     } catch (error) {
-      alert("失敗しました");
+      toast.error("メンバーの追加に失敗しました");
       console.error("Error adding member:", error);
     }
   };
