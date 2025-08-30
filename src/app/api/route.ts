@@ -17,7 +17,6 @@ export async function GET() {
     { name: "thkt" },
     { name: "sena-m09" },
     { name: "asato-yoshizawa" },
-    { name: "nakaji" },
     { name: "hikari-tanimoto" },
     { name: "t-kobayashi-glb" },
     { name: "takumibv" },
