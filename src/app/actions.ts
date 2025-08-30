@@ -3,15 +3,15 @@ import { neon } from "@neondatabase/serverless";
 
 function getDataBaseUrl() {
   if (process.env.NODE_ENV === "development") {
-    return process.env.DATABASE_URL_DEV;
+    return `${process.env.DATABASE_URL_DEV}`;
   }
   if (process.env.VERCEL_ENV === "preview") {
-    return process.env.DATABASE_URL_DEV;
+    return `${process.env.DATABASE_URL_DEV}`;
   }
-  return process.env.DATABASE_URL;
+  return `${process.env.DATABASE_URL}`;
 }
 
-const sql = neon(`${getDataBaseUrl()}`);
+const sql = neon(getDataBaseUrl());
 
 export async function getMember() {
   const data = await sql`SELECT * FROM public.member`;
