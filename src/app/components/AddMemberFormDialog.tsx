@@ -34,7 +34,11 @@ export const AddMemberFormDialog = () => {
   };
 
   return (
-    <Dialog>
+    <Dialog
+      onOpenChange={(open) => {
+        if (!open) setName("");
+      }}
+    >
       <DialogTrigger asChild>
         <Button variant="outline">メンバーを追加</Button>
       </DialogTrigger>
