@@ -16,9 +16,11 @@ import {
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import { Checkbox } from "@/app/components/ui/checkbox";
+import { useState } from "react";
 
 export const AddMemberFormDialog = () => {
   const router = useRouter();
+  const [name, setName] = useState("");
 
   const handleSubmit = async (formData: FormData) => {
     try {
@@ -47,7 +49,14 @@ export const AddMemberFormDialog = () => {
           <div className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="name">名前</Label>
-              <Input name="name" type="text" id="name" required />
+              <Input
+                name="name"
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
             </div>
             <div className="flex items-center gap-2">
               <Checkbox name="participate" id="participate" defaultChecked />
@@ -59,7 +68,9 @@ export const AddMemberFormDialog = () => {
               <Button variant="outline">キャンセル</Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button type="submit">追加</Button>
+              <Button type="submit" disabled={!name}>
+                追加
+              </Button>
             </DialogClose>
           </DialogFooter>
         </form>
