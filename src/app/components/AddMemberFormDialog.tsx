@@ -18,6 +18,7 @@ import { Label } from "@/app/components/ui/label";
 import { Checkbox } from "@/app/components/ui/checkbox";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Plus } from "lucide-react";
 
 export const AddMemberFormDialog = () => {
   const router = useRouter();
@@ -46,7 +47,10 @@ export const AddMemberFormDialog = () => {
       }}
     >
       <DialogTrigger asChild>
-        <Button variant="outline">メンバーを追加</Button>
+        <Button>
+          <Plus />
+          メンバーを追加
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form action={handleSubmit} className="grid gap-5">
