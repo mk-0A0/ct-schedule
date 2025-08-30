@@ -37,7 +37,7 @@ export const AddMemberFormDialog = () => {
         <Button variant="outline">メンバーを追加</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <form action={handleSubmit}>
+        <form action={handleSubmit} className="grid gap-5">
           <DialogHeader>
             <DialogTitle>メンバーを追加</DialogTitle>
             <DialogDescription>
