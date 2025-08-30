@@ -58,7 +58,9 @@ export const AddMemberFormDialog = () => {
             <DialogClose asChild>
               <Button variant="outline">キャンセル</Button>
             </DialogClose>
-            <Button type="submit">追加</Button>
+            <DialogClose asChild>
+              <Button type="submit">追加</Button>
+            </DialogClose>
           </DialogFooter>
         </form>
       </DialogContent>
