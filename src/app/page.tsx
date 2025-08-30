@@ -1,5 +1,4 @@
 import { getMember } from "@/app/actions";
-import { Member } from "@/app/api/route";
 import { AddMemberFormDialog } from "@/app/components/AddMemberFormDialog";
 import { Toaster } from "@/app/components/ui/sonner";
 import {
@@ -11,32 +10,11 @@ import {
 } from "date-fns";
 import { ja } from "date-fns/locale";
 
-async function getMemberData() {
-  function getBaseUrl() {
-    if (process.env.NODE_ENV === "development") {
-      return "http://localhost:3000";
-    }
-    if (process.env.VERCEL_ENV === "preview") {
-      return `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
-    }
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL!}`;
-  }
-
-  const data = await fetch(`${getBaseUrl()}/api`, {
-    cache: "no-store",
-    headers: {
-      "x-vercel-protection-bypass": `${process.env.VERCEL_AUTOMATION_BYPASS_SECRET}`,
-    },
-  });
-
-  return data.json();
-}
-
 const MemberCell = ({ name }: { name: string }) => {
   return (
     <th className="border-r text-sm p-1 font-normal bg-gray-100">
       <div className="w-[100px]">
-        <span className="block text-xs text-gray-700 leading-none font-bold">
+        <span className="block text-xs text-gray-700 leading-none font-bold break-words">
           {name}
         </span>
       </div>
@@ -58,13 +36,6 @@ export default async function Home() {
     <main className="max-w-7xl mx-auto p-10">
       {/* メンバー追加の操作後に表示されるToast */}
       <Toaster position="top-center" />
-      {memberDataNew.map((member) => (
-        <div key={member.id}>
-          <span>{member.id} </span>
-          <span>{member.name}: </span>
-          <span>{String(member.participate)}</span>
-        </div>
-      ))}
       <div className="grid gap-5">
         <div className="flex justify-between items-center gap-10">
           <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
@@ -108,29 +79,28 @@ export default async function Home() {
           <tbody>
             {/* "": 左上の空マス */}
             {[{ name: "" }, ...memberData].map((colMember, rowIndex) => (
-                <tr key={`tr-${rowIndex}`} className="border-b">
-                  <MemberCell name={colMember.name} />
+              <tr key={`tr-${rowIndex}`} className="border-b">
+                <MemberCell name={colMember.name} />
                 {memberData.map((rowMember, colIndex) =>
-                    rowIndex === 0 ? (
-                      <MemberCell
-                        name={rowMember.name}
-                        key={`cell-th-${colIndex}`}
-                      />
-                    ) : (
-                      <td
-                        key={`cell-${colIndex}`}
-                        className={`border-r text-center text-gray-500 ${
-                          rowIndex - 1 === colIndex && "bg-gray-100"
-                        }`}
-                      >
-                        {/* rowIndexは空マス分要素数が1つ多いため-1をしている */}
+                  rowIndex === 0 ? (
+                    <MemberCell
+                      name={rowMember.name}
+                      key={`cell-th-${colIndex}`}
+                    />
+                  ) : (
+                    <td
+                      key={`cell-${colIndex}`}
+                      className={`border-r text-center text-gray-500 ${
+                        rowIndex - 1 === colIndex && "bg-gray-100"
+                      }`}
+                    >
+                      {/* rowIndexは空マス分要素数が1つ多いため-1をしている */}
                       {(colIndex + rowIndex - 1) % memberData.length}
-                      </td>
-                    )
-                  )}
-                </tr>
-              )
-            )}
+                    </td>
+                  )
+                )}
+              </tr>
+            ))}
           </tbody>
         </table>
       </article>
