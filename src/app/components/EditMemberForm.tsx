@@ -49,10 +49,10 @@ const EditMemberRow = ({ member }: { member: Member }) => {
         </div>
       </div>
       <div className="flex gap-2">
-        <Button type="submit">保存</Button>
         <Button onClick={() => setEdit(false)} variant="outline">
           キャンセル
         </Button>
+        <Button type="submit">保存</Button>
       </div>
     </form>
   ) : (
