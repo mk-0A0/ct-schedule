@@ -32,34 +32,26 @@ const EditMemberRow = ({ member }: { member: Member }) => {
   return edit ? (
     <form action={handleSubmit} key={member.id}>
       <Input type="hidden" name="id" value={member.id} />
-          <Input
-            name="name"
-            id="name"
-            key={member.id}
-            value={member.name}
-            onChange={() => {}}
-          />
-          <Checkbox
-            name="participate"
-            id="participate"
-            className="inline-block ml-2"
-            checked={member.participate}
-            onChange={() => {}}
-          />
-          <Label htmlFor="participate">CTに参加する</Label>
-          <Button type="submit">保存</Button>
-          <Button onClick={() => setEdit(false)} variant="outline">
-            キャンセル
-          </Button>
-        </form>
-      ) : (
-        <div className="flex">
-          <p key={member.id}>
-            {member.name}: {String(member.participate)}
-          </p>
-          <Button variant="ghost" onClick={() => setEdit(!edit)} size="icon">
-            <PencilLine />
-          </Button>
+      <Input name="name" id="name" defaultValue={member.name} />
+      <Checkbox
+        name="participate"
+        id="participate"
+        defaultChecked={member.participate}
+      />
+      <Label htmlFor="participate">CTに参加する</Label>
+      <Button type="submit">保存</Button>
+      <Button onClick={() => setEdit(false)} variant="outline">
+        キャンセル
+      </Button>
+    </form>
+  ) : (
+    <div className="flex">
+      <p key={member.id}>
+        {member.name}: {String(member.participate)}
+      </p>
+      <Button variant="ghost" onClick={() => setEdit(!edit)} size="icon">
+        <PencilLine />
+      </Button>
     </div>
   );
 };
