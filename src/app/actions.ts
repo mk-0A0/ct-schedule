@@ -40,3 +40,19 @@ export async function addMember(formData: FormData) {
 
   return result[0];
 }
+
+// メンバーの編集
+export async function updateMember(
+  id: number,
+  name: string,
+  participate: boolean
+) {
+  const result = await sql`
+    UPDATE member
+    SET name = ${name}, participate = ${participate}
+    WHERE id = ${id}
+    RETURNING *;
+  `;
+
+  return result[0];
+}
