@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const EditMemberRow = ({ member }: { member: Member }) => {
+export const EditMemberForm = ({ member }: { member: Member }) => {
   const router = useRouter();
   const [edit, setEdit] = useState(false);
 
@@ -65,10 +65,4 @@ const EditMemberRow = ({ member }: { member: Member }) => {
       </Button>
     </div>
   );
-};
-
-export const EditMemberForm = ({ members }: { members: Member[] }) => {
-  return members.map((member) => (
-    <EditMemberRow key={member.id} member={member} />
-  ));
 };

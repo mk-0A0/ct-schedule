@@ -6,7 +6,9 @@ export default async function Home() {
   return (
     <main className="max-w-7xl mx-auto p-10">
       <h1 className="text-2xl font-bold">メンバー一覧</h1>
-      <EditMemberForm members={memberData} />
+      {memberData.map((member) => (
+        <EditMemberForm key={member.id} member={member} />
+      ))}
     </main>
   );
 }
