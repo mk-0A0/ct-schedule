@@ -13,6 +13,7 @@ const EditMemberRow = ({ member }: { member: Member }) => {
 
   return edit ? (
         <form action="" key={member.id}>
+      <Input type="hidden" name="id" value={member.id} />
           <Input
             name="name"
             id="name"
