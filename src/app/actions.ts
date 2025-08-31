@@ -13,12 +13,18 @@ function getDataBaseUrl() {
 
 const sql = neon(getDataBaseUrl());
 
-export async function getMember() {
+export type Member = {
+  id: number;
+  name: string;
+  participate: boolean;
+};
+
+export async function getMember(): Promise<Member[]> {
   const data = await sql`
     SELECT * FROM public.member
     ORDER BY id ASC
   `;
-  return data;
+  return data as Member[];
 }
 
 // メンバーの追加
