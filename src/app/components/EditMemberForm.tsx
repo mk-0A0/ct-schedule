@@ -13,9 +13,6 @@ const EditMemberRow = ({ member }: { member: Member }) => {
 
   return (
     <div>
-      <Button variant="outline" onClick={() => setEdit(!edit)} size="icon">
-        <PencilLine />
-      </Button>
       {edit ? (
         <form action="" key={member.id}>
           <Input
@@ -33,11 +30,20 @@ const EditMemberRow = ({ member }: { member: Member }) => {
             onChange={() => {}}
           />
           <Label htmlFor="participate">CTに参加する</Label>
+          <Button type="submit">保存</Button>
+          <Button onClick={() => setEdit(false)} variant="outline">
+            キャンセル
+          </Button>
         </form>
       ) : (
-        <p key={member.id}>
-          {member.name}: {String(member.participate)}
-        </p>
+        <div className="flex">
+          <p key={member.id}>
+            {member.name}: {String(member.participate)}
+          </p>
+          <Button variant="ghost" onClick={() => setEdit(!edit)} size="icon">
+            <PencilLine />
+          </Button>
+        </div>
       )}
     </div>
   );
