@@ -11,9 +11,7 @@ import { useState } from "react";
 const EditMemberRow = ({ member }: { member: Member }) => {
   const [edit, setEdit] = useState(false);
 
-  return (
-    <div>
-      {edit ? (
+  return edit ? (
         <form action="" key={member.id}>
           <Input
             name="name"
@@ -43,8 +41,6 @@ const EditMemberRow = ({ member }: { member: Member }) => {
           <Button variant="ghost" onClick={() => setEdit(!edit)} size="icon">
             <PencilLine />
           </Button>
-        </div>
-      )}
     </div>
   );
 };
