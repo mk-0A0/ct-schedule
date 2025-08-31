@@ -30,19 +30,30 @@ const EditMemberRow = ({ member }: { member: Member }) => {
   };
 
   return edit ? (
-    <form action={handleSubmit} key={member.id}>
+    <form action={handleSubmit} key={member.id} className="grid gap-3">
       <Input type="hidden" name="id" value={member.id} />
-      <Input name="name" id="name" defaultValue={member.name} />
-      <Checkbox
-        name="participate"
-        id="participate"
-        defaultChecked={member.participate}
-      />
-      <Label htmlFor="participate">CTに参加する</Label>
-      <Button type="submit">保存</Button>
-      <Button onClick={() => setEdit(false)} variant="outline">
-        キャンセル
-      </Button>
+      <div className="flex gap-3 items-center">
+        <Input
+          name="name"
+          id="name"
+          defaultValue={member.name}
+          className="w-[300px]"
+        />
+        <div className="flex items-center gap-2">
+          <Checkbox
+            name="participate"
+            id="participate"
+            defaultChecked={member.participate}
+          />
+          <Label htmlFor="participate">CTに参加する</Label>
+        </div>
+      </div>
+      <div className="flex gap-2">
+        <Button type="submit">保存</Button>
+        <Button onClick={() => setEdit(false)} variant="outline">
+          キャンセル
+        </Button>
+      </div>
     </form>
   ) : (
     <div className="flex">
