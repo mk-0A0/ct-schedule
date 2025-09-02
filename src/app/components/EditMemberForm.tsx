@@ -56,7 +56,7 @@ export const EditMemberForm = ({ member }: { member: Member }) => {
       </div>
     </form>
   ) : (
-    <div className="flex">
+    <div className="flex gap-3 items-center">
       <p key={member.id}>
         {member.name}: {String(member.participate)}
       </p>
