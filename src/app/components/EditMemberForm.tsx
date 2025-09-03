@@ -57,9 +57,15 @@ export const EditMemberForm = ({ member }: { member: Member }) => {
     </form>
   ) : (
     <div className="flex gap-3 items-center">
-      <p key={member.id}>
-        {member.name}: {String(member.participate)}
-      </p>
+      <p key={member.id}>{member.name}</p>
+      <div className="flex gap-1 items-center text-sm">
+        <div
+          className={`${
+            member.participate ? "bg-green-500" : "bg-gray-200"
+          } h-2 w-2 rounded-full`}
+        />
+        {member.participate ? "参加" : "不参加"}
+      </div>
       <Button variant="ghost" onClick={() => setEdit(!edit)} size="icon">
         <PencilLine />
       </Button>
