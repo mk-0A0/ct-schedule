@@ -56,3 +56,13 @@ export async function updateMember(
 
   return result[0];
 }
+
+// メンバーの削除
+export async function deleteMember(id: number) {
+  const result = await sql`
+    DELETE FROM member
+    WHERE id = ${id}
+    RETURNING name;
+  `;
+  return result[0]?.name;
+}

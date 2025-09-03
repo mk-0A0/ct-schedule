@@ -1,6 +1,6 @@
 "use client";
 
-import { addMember } from "@/app/actions";
+import { deleteMember, Member } from "@/app/actions";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/button";
 import {
@@ -16,12 +16,13 @@ import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 
-export const DeleteMemberFormDialog = () => {
+export const DeleteMemberFormDialog = ({ member }: { member: Member }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  const handleSubmit = async (formData: FormData) => {
+  const handleSubmit = async () => {
     try {
+      await deleteMember(Number(member.id));
       setOpen(false);
       toast.success(`${member.name} を削除しました`);
       router.refresh();
