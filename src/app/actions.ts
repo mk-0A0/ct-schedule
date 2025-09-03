@@ -13,12 +13,18 @@ function getDataBaseUrl() {
 
 const sql = neon(getDataBaseUrl());
 
-export async function getMember() {
+export type Member = {
+  id: number;
+  name: string;
+  participate: boolean;
+};
+
+export async function getMember(): Promise<Member[]> {
   const data = await sql`
     SELECT * FROM public.member
     ORDER BY id ASC
   `;
-  return data;
+  return data as Member[];
 }
 
 // メンバーの追加
@@ -29,6 +35,22 @@ export async function addMember(formData: FormData) {
   const result = await sql`
     INSERT INTO member (name, participate)
     VALUES (${name}, ${participate})
+    RETURNING *;
+  `;
+
+  return result[0];
+}
+
+// メンバーの編集
+export async function updateMember(
+  id: number,
+  name: string,
+  participate: boolean
+) {
+  const result = await sql`
+    UPDATE member
+    SET name = ${name}, participate = ${participate}
+    WHERE id = ${id}
     RETURNING *;
   `;
 
