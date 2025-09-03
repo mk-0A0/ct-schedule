@@ -30,7 +30,11 @@ export const EditMemberForm = ({ member }: { member: Member }) => {
   };
 
   return edit ? (
-    <form action={handleSubmit} key={member.id} className="grid gap-3">
+    <form
+      action={handleSubmit}
+      key={member.id}
+      className="flex justify-between"
+    >
       <Input type="hidden" name="id" value={member.id} />
       <div className="flex gap-3 items-center">
         <Input
@@ -56,7 +60,7 @@ export const EditMemberForm = ({ member }: { member: Member }) => {
       </div>
     </form>
   ) : (
-    <div className="flex gap-3 items-center">
+    <div className="flex gap-3 items-center justify-between">
       <div key={member.id} className="flex gap-2 items-center">
         <span className="font-bold">{member.name}</span>
         <div className="flex gap-1 items-center text-sm">
