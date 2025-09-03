@@ -62,7 +62,7 @@ export const EditMemberForm = ({ member }: { member: Member }) => {
   ) : (
     <div className="flex gap-3 items-center justify-between">
       <div key={member.id} className="flex gap-2 items-center">
-        <span className="font-bold">{member.name}</span>
+        <span className="font-semibold">{member.name}</span>
         <div className="flex gap-1 items-center text-sm">
           <div
             className={`${
