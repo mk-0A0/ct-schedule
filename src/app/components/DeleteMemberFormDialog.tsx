@@ -22,9 +22,9 @@ export const DeleteMemberFormDialog = ({ member }: { member: Member }) => {
 
   const handleSubmit = async () => {
     try {
-      await deleteMember(Number(member.id));
+      const deleteName = await deleteMember(Number(member.id));
       setOpen(false);
-      toast.success(`${member.name} を削除しました`);
+      toast.success(`${deleteName} を削除しました`);
       router.refresh();
     } catch (error) {
       toast.error("メンバーの削除に失敗しました");
@@ -45,7 +45,7 @@ export const DeleteMemberFormDialog = ({ member }: { member: Member }) => {
             <DialogTitle>メンバーを削除</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4">
-            <div className="grid gap-2">${addMember.name} を削除しますか？</div>
+            <div className="grid gap-2">{member.name} を削除しますか？</div>
           </div>
           <DialogFooter>
             <DialogClose asChild>
