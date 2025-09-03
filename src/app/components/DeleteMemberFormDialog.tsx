@@ -14,12 +14,15 @@ import {
 } from "@/app/components/ui/dialog";
 import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
+import { useState } from "react";
 
 export const DeleteMemberFormDialog = () => {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = async (formData: FormData) => {
     try {
+      setOpen(false);
       toast.success(`${member.name} を削除しました`);
       router.refresh();
     } catch (error) {
@@ -29,7 +32,7 @@ export const DeleteMemberFormDialog = () => {
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="ghost" size="icon">
           <Trash2 />
