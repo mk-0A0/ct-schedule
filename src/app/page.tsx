@@ -8,6 +8,7 @@ import {
   startOfDay,
 } from "date-fns";
 import { ja } from "date-fns/locale";
+import Link from "next/link";
 
 const MemberCell = ({ name }: { name: string }) => {
   return (
@@ -42,7 +43,12 @@ export default async function Home() {
           <AddMemberFormDialog />
         </div>
         <section>
-          <p>現在の参加者：{member.length}人</p>
+          <p>
+            現在の参加者：
+            <Link href="/member" className="underline">
+              {member.length}人
+            </Link>
+          </p>
           <p className="mt-4 text-sm">グレーアウトしたマスの扱いについて</p>
           <p className="text-gray-500 text-sm">
             ・参加人数が奇数： グレーアウトしたマスはお休み
