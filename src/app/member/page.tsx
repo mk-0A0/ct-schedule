@@ -1,7 +1,7 @@
 import { getMember } from "@/app/actions";
-import { AddMemberFormDialog } from "@/app/components/AddMemberFormDialog";
-import { EditMemberForm } from "@/app/components/EditMemberForm";
-import { Separator } from "@/app/components/ui/separator";
+import { AddMemberFormDialog } from "@/components/AddMemberFormDialog";
+import { EditMemberForm } from "@/components/EditMemberForm";
+import { Separator } from "@/components/ui/separator";
 import { Fragment } from "react";
 
 export default async function Home() {

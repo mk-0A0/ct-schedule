@@ -2,7 +2,7 @@
 
 import { deleteMember, Member } from "@/app/actions";
 import { useRouter } from "next/navigation";
-import { Button } from "@/app/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/app/components/ui/dialog";
+} from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";

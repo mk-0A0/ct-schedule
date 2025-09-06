@@ -1,11 +1,11 @@
 "use client";
 
 import { Member, updateMember } from "@/app/actions";
-import { DeleteMemberDialog } from "@/app/components/DeleteMemberDialog";
-import { Button } from "@/app/components/ui/button";
-import { Checkbox } from "@/app/components/ui/checkbox";
-import { Input } from "@/app/components/ui/input";
-import { Label } from "@/app/components/ui/label";
+import { DeleteMemberDialog } from "@/components/DeleteMemberDialog";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { PencilLine } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
