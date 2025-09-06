@@ -1,6 +1,7 @@
 "use client";
 
 import { Member, updateMember } from "@/app/actions";
+import { DeleteMemberDialog } from "@/app/components/DeleteMemberDialog";
 import { Button } from "@/app/components/ui/button";
 import { Checkbox } from "@/app/components/ui/checkbox";
 import { Input } from "@/app/components/ui/input";
@@ -72,9 +73,12 @@ export const EditMemberForm = ({ member }: { member: Member }) => {
           {member.participate ? "参加" : "不参加"}
         </div>
       </div>
-      <Button variant="ghost" onClick={() => setEdit(!edit)} size="icon">
-        <PencilLine />
-      </Button>
+      <div className="flex gap-1">
+        <Button variant="ghost" onClick={() => setEdit(!edit)} size="icon">
+          <PencilLine />
+        </Button>
+        <DeleteMemberDialog member={member} />
+      </div>
     </div>
   );
 };
