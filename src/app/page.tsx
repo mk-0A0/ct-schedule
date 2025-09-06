@@ -1,6 +1,5 @@
 import { getMember } from "@/app/actions";
 import { AddMemberFormDialog } from "@/app/components/AddMemberFormDialog";
-import { Toaster } from "@/app/components/ui/sonner";
 import {
   eachDayOfInterval,
   format,
@@ -9,6 +8,7 @@ import {
   startOfDay,
 } from "date-fns";
 import { ja } from "date-fns/locale";
+import Link from "next/link";
 
 const MemberCell = ({ name }: { name: string }) => {
   return (
@@ -37,15 +37,18 @@ export default async function Home() {
 
   return (
     <main className="max-w-7xl mx-auto p-10">
-      {/* メンバー追加の操作後に表示されるToast */}
-      <Toaster position="top-center" />
       <div className="grid gap-5">
         <div className="flex justify-between items-center gap-10">
           <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
           <AddMemberFormDialog />
         </div>
         <section>
-          <p>現在の参加者：{member.length}人</p>
+          <p>
+            現在の参加者：
+            <Link href="/member" className="underline">
+              {member.length}人
+            </Link>
+          </p>
           <p className="mt-4 text-sm">グレーアウトしたマスの扱いについて</p>
           <p className="text-gray-500 text-sm">
             ・参加人数が奇数： グレーアウトしたマスはお休み
