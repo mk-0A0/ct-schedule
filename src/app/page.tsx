@@ -1,5 +1,5 @@
-import { getMember } from "@/app/actions";
-import { AddMemberFormDialog } from "@/app/components/AddMemberFormDialog";
+import { getMember } from "@/src/app/actions";
+import { AddMemberFormDialog } from "@/src/app/components/AddMemberFormDialog";
 import {
   eachDayOfInterval,
   format,
