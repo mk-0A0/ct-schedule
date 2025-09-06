@@ -10,9 +10,13 @@ import {
 import { ja } from "date-fns/locale";
 import Link from "next/link";
 
-const MemberCell = ({ name }: { name: string }) => {
+const MemberCell = ({ name, row }: { name: string; row?: boolean }) => {
   return (
-    <th className="border-r text-sm p-1 font-normal bg-gray-100">
+    <th
+      className={`border-r text-sm p-1 font-normal bg-gray-100 ${
+        row && "sticky top-0 left-0"
+      }`}
+    >
       <div className="w-[100px]">
         <span className="block text-xs text-gray-700 leading-none font-bold break-words">
           {name}
@@ -81,34 +85,36 @@ export default async function Home() {
             )}
           </ol>
         </aside>
-        <table className="border-t border-l h-full">
-          <tbody>
-            {/* "": 左上の空マス */}
-            {[{ name: "" }, ...member].map((colMember, rowIndex) => (
-              <tr key={`tr-${rowIndex}`} className="border-b">
-                <MemberCell name={colMember.name} />
-                {member.map((rowMember, colIndex) =>
-                  rowIndex === 0 ? (
-                    <MemberCell
-                      name={rowMember.name}
-                      key={`cell-th-${colIndex}`}
-                    />
-                  ) : (
-                    <td
-                      key={`cell-${colIndex}`}
-                      className={`border-r text-center text-gray-500 ${
-                        rowIndex - 1 === colIndex && "bg-gray-100"
-                      }`}
-                    >
-                      {/* rowIndexは空マス分要素数が1つ多いため-1をしている */}
-                      {(colIndex + rowIndex - 1) % member.length}
-                    </td>
-                  )
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="border-t border-l overflow-scroll">
+          <table className="h-full">
+            <tbody>
+              {/* "": 左上の空マス */}
+              {[{ name: "" }, ...member].map((colMember, rowIndex) => (
+                <tr key={`tr-${rowIndex}`} className="border-b">
+                  <MemberCell name={colMember.name} row />
+                  {member.map((rowMember, colIndex) =>
+                    rowIndex === 0 ? (
+                      <MemberCell
+                        name={rowMember.name}
+                        key={`cell-th-${colIndex}`}
+                      />
+                    ) : (
+                      <td
+                        key={`cell-${colIndex}`}
+                        className={`border-r text-center text-gray-500 ${
+                          rowIndex - 1 === colIndex && "bg-gray-100"
+                        }`}
+                      >
+                        {/* rowIndexは空マス分要素数が1つ多いため-1をしている */}
+                        {(colIndex + rowIndex - 1) % member.length}
+                      </td>
+                    )
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </article>
     </main>
   );
