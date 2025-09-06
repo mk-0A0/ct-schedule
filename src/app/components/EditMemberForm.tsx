@@ -1,7 +1,7 @@
 "use client";
 
 import { Member, updateMember } from "@/app/actions";
-import { DeleteMemberFormDialog } from "@/app/components/DeleteMemberFormDialog";
+import { DeleteMemberDialog } from "@/app/components/DeleteMemberDialog";
 import { Button } from "@/app/components/ui/button";
 import { Checkbox } from "@/app/components/ui/checkbox";
 import { Input } from "@/app/components/ui/input";
@@ -77,7 +77,7 @@ export const EditMemberForm = ({ member }: { member: Member }) => {
         <Button variant="ghost" onClick={() => setEdit(!edit)} size="icon">
           <PencilLine />
         </Button>
-        <DeleteMemberFormDialog member={member} />
+        <DeleteMemberDialog member={member} />
       </div>
     </div>
   );

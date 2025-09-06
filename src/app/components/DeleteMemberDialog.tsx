@@ -16,7 +16,7 @@ import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 
-export const DeleteMemberFormDialog = ({ member }: { member: Member }) => {
+export const DeleteMemberDialog = ({ member }: { member: Member }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
