@@ -7,11 +7,18 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PencilLine } from "lucide-react";
+import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export const EditMemberForm = ({ member }: { member: Member }) => {
+export const EditMemberForm = ({
+  member,
+  session,
+}: {
+  member: Member;
+  session: Session | null;
+}) => {
   const router = useRouter();
   const [edit, setEdit] = useState(false);
 
@@ -73,12 +80,14 @@ export const EditMemberForm = ({ member }: { member: Member }) => {
           {member.participate ? "参加" : "不参加"}
         </div>
       </div>
-      <div className="flex gap-1">
-        <Button variant="ghost" onClick={() => setEdit(!edit)} size="icon">
-          <PencilLine />
-        </Button>
-        <DeleteMemberDialog member={member} />
-      </div>
+      {session && (
+        <div className="flex gap-1">
+          <Button variant="ghost" onClick={() => setEdit(!edit)} size="icon">
+            <PencilLine />
+          </Button>
+          <DeleteMemberDialog member={member} />
+        </div>
+      )}
     </div>
   );
 };
