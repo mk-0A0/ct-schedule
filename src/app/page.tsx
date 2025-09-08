@@ -53,7 +53,7 @@ export default async function Home() {
             <form
               action={async () => {
                 "use server";
-                await signIn("slack");
+                await signIn("slack", { callbackUrl: "/" });
               }}
             >
               <button
