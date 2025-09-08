@@ -47,8 +47,17 @@ export default async function Home() {
       <div className="grid gap-5">
         <div className="flex justify-between items-center gap-10">
           <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
-          {session ? (
+          {session && session.user ? (
+            <div className="flex items-center gap-4">
             <AddMemberFormDialog />
+              <img
+                src={session.user.image || ""}
+                alt={`${session.user.name}のアイコン画像`}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            </div>
           ) : (
             <form
               action={async () => {
