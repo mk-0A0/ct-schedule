@@ -1,4 +1,4 @@
-import { auth, signIn } from "@/auth";
+import { auth, signIn, signOut } from "@/auth";
 import { getMember } from "@/app/actions";
 import { AddMemberFormDialog } from "@/components/AddMemberFormDialog";
 import {
@@ -49,7 +49,7 @@ export default async function Home() {
           <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
           {session && session.user ? (
             <div className="flex items-center gap-4">
-            <AddMemberFormDialog />
+              <AddMemberFormDialog />
               <img
                 src={session.user.image || ""}
                 alt={`${session.user.name}のアイコン画像`}
@@ -57,6 +57,19 @@ export default async function Home() {
                 height={40}
                 className="rounded-full"
               />
+              <form
+                action={async () => {
+                  "use server";
+                  await signOut();
+                }}
+              >
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                  Signout
+                </button>
+              </form>
             </div>
           ) : (
             <form
