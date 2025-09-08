@@ -10,6 +10,12 @@ import {
 } from "date-fns";
 import { ja } from "date-fns/locale";
 import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const MemberCell = ({ name, row }: { name: string; row?: boolean }) => {
   return (
@@ -50,26 +56,29 @@ export default async function Home() {
           {session && session.user ? (
             <div className="flex items-center gap-4">
               <AddMemberFormDialog />
-              <img
-                src={session.user.image || ""}
-                alt={`${session.user.name}のアイコン画像`}
-                width={40}
-                height={40}
-                className="rounded-full"
-              />
-              <form
-                action={async () => {
-                  "use server";
-                  await signOut();
-                }}
-              >
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
-                >
-                  Signout
-                </button>
-              </form>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <img
+                    src={session.user.image || ""}
+                    alt={`${session.user.name}のアイコン画像`}
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
+                    <form
+                      action={async () => {
+                        "use server";
+                        await signOut();
+                      }}
+                    >
+                      <button type="submit">ログアウト</button>
+                    </form>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           ) : (
             <form
