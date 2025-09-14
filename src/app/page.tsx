@@ -16,6 +16,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Slack } from "lucide-react";
 
 const MemberCell = ({ name, row }: { name: string; row?: boolean }) => {
   return (
@@ -87,12 +89,10 @@ export default async function Home() {
                 await signIn("slack", { callbackUrl: "/" });
               }}
             >
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-              >
+              <Button type="submit">
+                <Slack />
                 Signin with Slack
-              </button>
+              </Button>
             </form>
           )}
         </div>
