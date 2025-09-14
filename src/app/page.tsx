@@ -14,6 +14,8 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
@@ -69,6 +71,8 @@ export default async function Home() {
                   />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>{session.user.name}</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <form
                       action={async () => {
