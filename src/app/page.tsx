@@ -1,4 +1,4 @@
-import { auth, signIn, signOut } from "@/auth";
+import { auth, signOut } from "@/auth";
 import { getMember } from "@/app/actions";
 import { AddMemberFormDialog } from "@/components/AddMemberFormDialog";
 import {
@@ -18,8 +18,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Slack } from "lucide-react";
+import { SigninWithSlackButton } from "@/components/SigninWithSlackButton";
 
 const MemberCell = ({ name, row }: { name: string; row?: boolean }) => {
   return (
@@ -87,17 +86,7 @@ export default async function Home() {
               </DropdownMenu>
             </div>
           ) : (
-            <form
-              action={async () => {
-                "use server";
-                await signIn("slack", { callbackUrl: "/" });
-              }}
-            >
-              <Button type="submit">
-                <Slack />
-                Signin with Slack
-              </Button>
-            </form>
+            <SigninWithSlackButton />
           )}
         </div>
         <section>
