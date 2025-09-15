@@ -1,3 +1,4 @@
+import { auth, signIn, signOut } from "@/auth";
 import { getMember } from "@/app/actions";
 import { AddMemberFormDialog } from "@/components/AddMemberFormDialog";
 import {
@@ -9,6 +10,16 @@ import {
 } from "date-fns";
 import { ja } from "date-fns/locale";
 import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Slack } from "lucide-react";
 
 const MemberCell = ({ name, row }: { name: string; row?: boolean }) => {
   return (
@@ -27,6 +38,8 @@ const MemberCell = ({ name, row }: { name: string; row?: boolean }) => {
 };
 
 export default async function Home() {
+  const session = await auth();
+
   const mondays = eachDayOfInterval({
     start: new Date("2025-08-01"),
     end: new Date("2026-12-31"),
@@ -44,7 +57,48 @@ export default async function Home() {
       <div className="grid gap-5">
         <div className="flex justify-between items-center gap-10">
           <h1 className="text-2xl font-bold">CT組み合わせ表</h1>
-          <AddMemberFormDialog />
+          {session && session.user ? (
+            <div className="flex items-center gap-4">
+              <AddMemberFormDialog />
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <img
+                    src={session.user.image || ""}
+                    alt={`${session.user.name}のアイコン画像`}
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>{session.user.name}</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <form
+                      action={async () => {
+                        "use server";
+                        await signOut();
+                      }}
+                    >
+                      <button type="submit">ログアウト</button>
+                    </form>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          ) : (
+            <form
+              action={async () => {
+                "use server";
+                await signIn("slack", { callbackUrl: "/" });
+              }}
+            >
+              <Button type="submit">
+                <Slack />
+                Signin with Slack
+              </Button>
+            </form>
+          )}
         </div>
         <section>
           <p>
