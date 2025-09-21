@@ -38,6 +38,10 @@ const MemberCell = ({ name, row }: { name: string; row?: boolean }) => {
 
 export default async function Home() {
   const session = await auth();
+  const memberData = await getMember();
+
+  // 不参加のメンバーを除外
+  const member = memberData.filter((member) => member.participate);
 
   const mondays = eachDayOfInterval({
     start: new Date("2025-08-01"),
@@ -45,11 +49,6 @@ export default async function Home() {
   })
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
-
-  const memberData = await getMember();
-
-  // 不参加のメンバーを除外
-  const member = memberData.filter((member) => member.participate);
 
   return (
     <main className="max-w-7xl mx-auto p-10">
