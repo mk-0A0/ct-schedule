@@ -4,6 +4,7 @@ import { AddMemberFormDialog } from "@/components/AddMemberFormDialog";
 import {
   eachDayOfInterval,
   format,
+  isAfter,
   isBefore,
   isMonday,
   startOfDay,
@@ -49,6 +50,9 @@ export default async function Home() {
   })
     .filter((day) => isMonday(day))
     .map((date) => format(date, "yyyy/M/d(E)", { locale: ja }));
+
+  // 次の実施日を取得
+  const nextMonday = mondays.filter((monday) => isAfter(monday, new Date()))[0];
 
   return (
     <main className="max-w-7xl mx-auto p-10">
@@ -115,9 +119,13 @@ export default async function Home() {
                     key={monday}
                     className={
                       // mondayが今日以前であればグレーアウト
+                      `${
                       isBefore(monday, startOfDay(new Date()))
                         ? "bg-gray-300"
                         : ""
+                      }` +
+                      // 次の実施日をハイライト
+                      `${monday === nextMonday ? "bg-yellow-50" : ""}`
                     }
                   >
                     <span>{index % member.length}:</span>
