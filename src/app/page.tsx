@@ -130,7 +130,11 @@ export default async function Home() {
                     </span>
                     <span className="font-medium text-sm">{pair[0].name}</span>
                     <span className="text-gray-400 text-xs">×</span>
-                    <span className="font-medium text-sm">
+                    <span
+                      className={`font-medium text-sm ${
+                        !pair[1] && "text-red-400"
+                      }`}
+                    >
                       {pair[1] ? pair[1].name : "お休み"}
                     </span>
                   </div>
