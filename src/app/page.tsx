@@ -19,6 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SigninWithSlackButton } from "@/components/SigninWithSlackButton";
+import { generateRoundRobinPairs } from "@/src/utils/member";
 
 const MemberCell = ({ name, row }: { name: string; row?: boolean }) => {
   return (
@@ -50,6 +51,8 @@ export default async function Home() {
 
   // 不参加のメンバーを除外
   const member = memberData.filter((member) => member.participate);
+
+  const rounds = generateRoundRobinPairs(memberData);
 
   return (
     <main className="max-w-7xl mx-auto p-10">
@@ -105,6 +108,37 @@ export default async function Home() {
             自分がグレーアウトしたマスの場合、同じくグレーかつ数字が同じメンバーとペアになる
           </p>
         </section>
+      </div>
+      <div className="overflow-x-auto mt-10">
+        <div className="flex gap-4 pb-4 max-w-max">
+          {rounds.map((round, roundIndex) => (
+            <div
+              key={roundIndex}
+              className="border rounded-lg p-4 bg-white shadow-sm flex-shrink-0 min-w-[250px]"
+            >
+              <h2 className="text-lg font-semibold mb-4 text-center">
+                {roundIndex}
+              </h2>
+              <div className="flex flex-col gap-2">
+                {round.map((pair, pairIndex) => (
+                  <div
+                    key={pairIndex}
+                    className="flex items-center gap-2 p-3 bg-gray-50 rounded-md"
+                  >
+                    <span className="text-gray-400 text-xs">
+                      {pairIndex + 1}
+                    </span>
+                    <span className="font-medium text-sm">{pair[0].name}</span>
+                    <span className="text-gray-400 text-xs">×</span>
+                    <span className="font-medium text-sm">
+                      {pair[1] ? pair[1].name : "お休み"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
       <article className="flex gap-5 mt-10">
         <aside>
