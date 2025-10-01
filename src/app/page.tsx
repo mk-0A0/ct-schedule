@@ -116,41 +116,43 @@ export default async function Home() {
             mondays.map(
               (monday, mondayIndex) =>
                 mondayIndex < member.length && (
-            <div
-                    key={monday}
-              className="border rounded-lg p-4 bg-white shadow-sm flex-shrink-0 min-w-[250px]"
-            >
-              <h2 className="text-lg font-semibold mb-4 text-center">
-                      <time dateTime={monday}>{monday}</time>
-              </h2>
-              <div className="flex flex-col gap-2">
-                {round.map((pair, pairIndex) => (
                   <div
-                    key={pairIndex}
-                    className="flex items-center gap-2 p-3 bg-gray-50 rounded-md"
+                    key={monday}
+                    className={`border rounded-lg p-4 shadow-sm flex-shrink-0 min-w-[250px] ${
+                      isBefore(monday, startOfDay(new Date())) && "opacity-40"
+                    }`}
                   >
-                    <span className="text-gray-400 text-xs">
-                      {pairIndex + 1}
-                    </span>
+                    <h2 className="text-lg font-semibold mb-4 text-center">
+                      <time dateTime={monday}>{monday}</time>
+                    </h2>
+                    <div className="flex flex-col gap-2">
+                      {round.map((pair, pairIndex) => (
+                        <div
+                          key={pairIndex}
+                          className="flex items-center gap-2 p-3 bg-gray-50 rounded-md"
+                        >
+                          <span className="text-gray-400 text-xs">
+                            {pairIndex + 1}
+                          </span>
                           <span className="font-medium text-sm">
                             {pair[0].name}
                           </span>
                           {pair[1] ? (
                             <>
-                    <span className="text-gray-400 text-xs">×</span>
+                              <span className="text-gray-400 text-xs">×</span>
                               <span className="font-medium text-sm">
                                 {pair[1].name}
-                    </span>
+                              </span>
                             </>
                           ) : (
                             <Badge className="bg-gray-400 rounded-full">
                               お休み
                             </Badge>
                           )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
                 )
             )
           )}
