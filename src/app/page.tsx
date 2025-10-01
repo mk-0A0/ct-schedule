@@ -112,13 +112,16 @@ export default async function Home() {
       </div>
       <div className="overflow-x-auto mt-10">
         <div className="flex gap-4 pb-4 max-w-max">
-          {rounds.map((round, roundIndex) => (
+          {rounds.map((round) =>
+            mondays.map(
+              (monday, mondayIndex) =>
+                mondayIndex < member.length && (
             <div
-              key={roundIndex}
+                    key={monday}
               className="border rounded-lg p-4 bg-white shadow-sm flex-shrink-0 min-w-[250px]"
             >
               <h2 className="text-lg font-semibold mb-4 text-center">
-                {roundIndex}
+                      <time dateTime={monday}>{monday}</time>
               </h2>
               <div className="flex flex-col gap-2">
                 {round.map((pair, pairIndex) => (
@@ -148,7 +151,9 @@ export default async function Home() {
                 ))}
               </div>
             </div>
-          ))}
+                )
+            )
+          )}
         </div>
       </div>
       <article className="flex gap-5 mt-10">
