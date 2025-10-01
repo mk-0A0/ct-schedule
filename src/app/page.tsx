@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SigninWithSlackButton } from "@/components/SigninWithSlackButton";
 import { generateRoundRobinPairs } from "@/src/utils/member";
+import { Badge } from "@/components/ui/badge";
 
 const MemberCell = ({ name, row }: { name: string; row?: boolean }) => {
   return (
@@ -128,15 +129,21 @@ export default async function Home() {
                     <span className="text-gray-400 text-xs">
                       {pairIndex + 1}
                     </span>
-                    <span className="font-medium text-sm">{pair[0].name}</span>
+                          <span className="font-medium text-sm">
+                            {pair[0].name}
+                          </span>
+                          {pair[1] ? (
+                            <>
                     <span className="text-gray-400 text-xs">×</span>
-                    <span
-                      className={`font-medium text-sm ${
-                        !pair[1] && "text-red-400"
-                      }`}
-                    >
-                      {pair[1] ? pair[1].name : "お休み"}
+                              <span className="font-medium text-sm">
+                                {pair[1].name}
                     </span>
+                            </>
+                          ) : (
+                            <Badge className="bg-gray-400 rounded-full">
+                              お休み
+                            </Badge>
+                          )}
                   </div>
                 ))}
               </div>
