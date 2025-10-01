@@ -19,10 +19,11 @@ export function generateRoundRobinPairs(memberData: Member[]) {
   // 1回分のペアを作成
   for (let round = 0; round < totalMembers - 1; round++) {
     const roundPairs: Pair[] = [];
+
     // 二人一組のペアを作成
     for (let i = 0; i < totalMembers / 2; i++) {
-      const member1 = members[i];
-      const member2 = members[totalMembers - 1 - i]; // ペアになる人を後ろから取得
+      const member1 = members[i]; // ペア1人目を配列の前半から取得
+      const member2 = members[totalMembers - 1 - i]; // ペア2人目を配列の後半から取得
 
       if (member1 !== null) {
         roundPairs.push([member1, member2]);
@@ -33,11 +34,12 @@ export function generateRoundRobinPairs(memberData: Member[]) {
     rounds.push(roundPairs);
 
     if (totalMembers > 2) {
-      const temp = members[1];
+      // 1人目は固定、2人目以降のメンバーを循環させて重複しない組み合わせを作る
+      const temp = members[1]; // 2人目を保存
       for (let i = 1; i < totalMembers - 1; i++) {
-        members[i] = members[i + 1];
+        members[i] = members[i + 1]; // メンバーを一つ前にシフト
       }
-      members[totalMembers - 1] = temp;
+      members[totalMembers - 1] = temp; // 保存した2人目を配列の最後に移動
     }
   }
   return rounds;
