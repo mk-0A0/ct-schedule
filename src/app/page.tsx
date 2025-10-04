@@ -154,7 +154,7 @@ export default async function Home() {
           {ctSchedules.map((schedule) => (
             <div
               key={schedule.date}
-              className={`border rounded-lg p-4 shadow-sm flex-shrink-0 min-w-[250px] ${
+              className={`border rounded-lg p-4 shadow-sm flex-shrink-0 min-w-[300px] ${
                 isBefore(schedule.date, startOfDay(new Date())) && "opacity-40"
               }`}
             >
