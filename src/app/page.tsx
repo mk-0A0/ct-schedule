@@ -179,7 +179,9 @@ export default async function Home() {
                         </span>
                       </>
                     ) : (
-                      <Badge className="bg-gray-400 rounded-full">お休み</Badge>
+                      <Badge className="bg-gray-400 rounded-full shadow-none">
+                        お休み
+                      </Badge>
                     )}
                   </div>
                 ))}
