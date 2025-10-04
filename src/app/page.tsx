@@ -81,6 +81,7 @@ export default async function Home() {
 
   const rounds = generateRoundRobinPairs(memberData);
 
+  // 日付とその日のペアを1つの配列にする
   function generateCTSchedules(): SCHEDULE {
     const schedule: SCHEDULE = [];
     mondays.forEach((monday, mondayIndex) => {
