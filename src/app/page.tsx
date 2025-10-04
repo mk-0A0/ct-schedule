@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SigninWithSlackButton } from "@/components/SigninWithSlackButton";
 import { generateRoundRobinPairs, Round } from "@/src/utils/member";
+import { Badge } from "@/components/ui/badge";
 
 type CT = {
   date: string;
@@ -153,7 +154,9 @@ export default async function Home() {
           {ctSchedules.map((schedule) => (
             <div
               key={schedule.date}
-              className="border rounded-lg p-4 bg-white shadow-sm flex-shrink-0 min-w-[250px]"
+              className={`border rounded-lg p-4 shadow-sm flex-shrink-0 min-w-[300px] ${
+                isBefore(schedule.date, startOfDay(new Date())) && "opacity-40"
+              }`}
             >
               <h2 className="text-lg font-semibold mb-4 text-center">
                 <time dateTime={schedule.date}>{schedule.date}</time>
@@ -168,14 +171,18 @@ export default async function Home() {
                       {pairIndex + 1}
                     </span>
                     <span className="font-medium text-sm">{pair[0].name}</span>
-                    <span className="text-gray-400 text-xs">×</span>
-                    <span
-                      className={`font-medium text-sm ${
-                        !pair[1] && "text-red-400"
-                      }`}
-                    >
-                      {pair[1] ? pair[1].name : "お休み"}
-                    </span>
+                    {pair[1] ? (
+                      <>
+                        <span className="text-gray-400 text-xs">×</span>
+                        <span className="font-medium text-sm">
+                          {pair[1].name}
+                        </span>
+                      </>
+                    ) : (
+                      <Badge className="bg-gray-400 rounded-full shadow-none hover:bg-gray-400">
+                        お休み
+                      </Badge>
+                    )}
                   </div>
                 ))}
               </div>
